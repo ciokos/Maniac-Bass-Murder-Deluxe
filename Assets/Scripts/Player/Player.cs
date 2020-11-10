@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
         RefreshHealthText();
     }
 
-    public void RefreshHealthText()
+    private void RefreshHealthText()
     {
         healthText.text = ((int)currentHealth).ToString() + "/" + ((int)maxHealth).ToString();
     }
