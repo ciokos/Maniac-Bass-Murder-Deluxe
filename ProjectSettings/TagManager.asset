@@ -47,3 +47,6 @@ TagManager:
   - name: Wall
     uniqueID: 3207409369
     locked: 0
+  - name: SpawningLocation
+    uniqueID: 4031428145
+    locked: 0
