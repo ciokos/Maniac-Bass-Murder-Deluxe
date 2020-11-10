@@ -47,6 +47,8 @@ public class Enemy : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        bullet.gameObject.tag = "EnemyBullet";
+        bullet.GetComponent<Bullet>().SetDamage(10f);
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
     }
 
