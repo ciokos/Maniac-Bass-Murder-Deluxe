@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5385050707720532564}
   - component: {fileID: 5676276892930016121}
   - component: {fileID: 2283266115588336796}
+  - component: {fileID: 3108775942053091488}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,6 +101,34 @@ MonoBehaviour:
   beatsToShoot: 03000000070000000b0000000f000000
   bulletPrefab: {fileID: 6969571981930566044, guid: 74363a93e95e22c40b7423cf5bd9f5c6, type: 3}
   bulletForce: 2
+  maxHealth: 100
+  currentHealth: 0
+--- !u!61 &3108775942053091488
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213348605420570125}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.28, y: 1.96}
+    newSize: {x: 2.28, y: 1.96}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.28, y: 1.96}
+  m_EdgeRadius: 0
 --- !u!1 &3176059234962619963
 GameObject:
   m_ObjectHideFlags: 0

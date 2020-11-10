@@ -12,9 +12,13 @@ public class Enemy : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletForce = 20f;
 
+    private float maxHealth = 100f;
+    private float currentHealth;
+
     // Start is called before the first frame update
     void Start()
     {
+        currentHealth = maxHealth;
         conductor = (Conductor)GameObject.FindObjectOfType<Conductor>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         conductor.Beat.AddListener(onBeat);
@@ -32,12 +36,9 @@ public class Enemy : MonoBehaviour
     private void onBeat(float beatValue)
     {
         int beat = (int)beatValue;
-        Debug.Log(beatValue);
-        Debug.Log(beat);
         if(beatsToShoot.Contains(beat))
         {
             Shoot();
-            Debug.Log("Shoot");
         }
 
     }
@@ -47,5 +48,11 @@ public class Enemy : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+    }
+
+    public void TakeDamage(float dmg)
+    {
+        currentHealth -= dmg;
+        Debug.Log(currentHealth);
     }
 }
