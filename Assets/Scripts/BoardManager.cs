@@ -28,6 +28,9 @@ public class BoardManager : MonoBehaviour
     public GameObject[] floorTiles;
     public GameObject[] wallTiles;
     public GameObject[] outerWallTiles;
+    public GameObject[] ennemySpawnTiles;
+
+    public int ennemyNumber = 2;
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -77,7 +80,8 @@ public class BoardManager : MonoBehaviour
         {
             Vector3 randomPosition = RandomPosition();
             GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
-            Instantiate(tileChoice, randomPosition, Quaternion.identity);
+            GameObject instance = Instantiate(tileChoice, randomPosition, Quaternion.identity) as GameObject;
+            instance.transform.SetParent(boardHolder);
         }
     }
 
@@ -86,5 +90,6 @@ public class BoardManager : MonoBehaviour
         BoardSetup();
         InitializeList();
         LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
+        LayoutObjectAtRandom(ennemySpawnTiles, ennemyNumber, ennemyNumber);
     }
 }

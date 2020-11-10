@@ -241,9 +241,15 @@ MonoBehaviour:
   wallCount:
     minimum: 5
     maximum: 9
-  floorTiles: []
-  wallTiles: []
-  outerWallTiles: []
+  floorTiles:
+  - {fileID: 1246909237538158564, guid: 9894efef2ba392240964b66701f5efe7, type: 3}
+  wallTiles:
+  - {fileID: 855896928029014909, guid: 0593678f8803fc94ea7d76a6aa0ac134, type: 3}
+  outerWallTiles:
+  - {fileID: 855896928029014909, guid: 0593678f8803fc94ea7d76a6aa0ac134, type: 3}
+  ennemySpawnTiles:
+  - {fileID: 6069030391115997591, guid: c31d6cfda3aca844eb57ae9610f24b51, type: 3}
+  ennemyNumber: 2
 --- !u!114 &541298801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea211eee5984044fadb9384a8231b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardScript: {fileID: 0}
+  boardScript: {fileID: 541298800}
 --- !u!4 &541298802
 Transform:
   m_ObjectHideFlags: 0
