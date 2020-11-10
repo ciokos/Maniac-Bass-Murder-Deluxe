@@ -32,8 +32,6 @@ public class Enemy : MonoBehaviour
     private void onBeat(float beatValue)
     {
         int beat = (int)beatValue;
-        Debug.Log(beatValue);
-        Debug.Log(beat);
         if(beatsToShoot.Contains(beat))
         {
             Shoot();
