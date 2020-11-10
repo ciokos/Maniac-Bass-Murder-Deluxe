@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     public int[] beatsToShoot = { 3, 7, 11, 15 };
     public GameObject bulletPrefab;
     public float bulletForce = 20f;
+    public AudioSource audioSource;
 
     private readonly float maxHealth = 100f;
     private float currentHealth;
@@ -52,6 +53,7 @@ public class Enemy : MonoBehaviour
         bullet.gameObject.tag = "EnemyBullet";
         bullet.GetComponent<Bullet>().SetDamage(10f);
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        audioSource.Play();
     }
 
     public void TakeDamage(float dmg)

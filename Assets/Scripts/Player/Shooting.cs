@@ -9,7 +9,7 @@ public class Shooting : MonoBehaviour
     public float bulletForce = 20f;
     public float delay = 1f;
     private bool canShoot = true;
-
+    public AudioSource audioSource;
 
     // Update is called once per frame
     void Update()
@@ -29,6 +29,7 @@ public class Shooting : MonoBehaviour
         bullet.gameObject.tag = "PlayerBullet";
         bullet.GetComponent<Bullet>().SetDamage(10f);
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        audioSource.Play();
         canShoot = false;
         StartCoroutine(ShootDelay());
     }
