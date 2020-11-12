@@ -6,9 +6,16 @@ public class Shooting : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
-
     public float bulletForce = 20f;
+    public float delay = 1f;
+    private bool canShoot = true;
+    public AudioSource audioSource;
 
+    private Conductor conductor;
+    private void Start()
+    {
+        conductor = FindObjectOfType<Conductor>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -20,10 +27,31 @@ public class Shooting : MonoBehaviour
 
     void Shoot()
     {
+        if (!canShoot)
+            return;
+        var power = GetShootPower();
+        Debug.Log("Shoot strength: " + power);
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         bullet.gameObject.tag = "PlayerBullet";
-        bullet.GetComponent<Bullet>().SetDamage(10f);
+        bullet.GetComponent<Bullet>().SetDamage(20f * power);
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        audioSource.Play();
+        canShoot = false;
+        StartCoroutine(ShootDelay());
+    }
+
+    IEnumerator ShootDelay()
+    {
+        yield return new WaitForSeconds(delay);
+        canShoot = true;
+    }
+
+    private float GetShootPower()
+    {
+        var beat = conductor.getBeatValue();
+        var diff = Mathf.Abs(beat - Mathf.Round(beat)) * 2;
+        var power = 1 - diff;
+        return power;
     }
 }
