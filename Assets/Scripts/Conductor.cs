@@ -78,4 +78,9 @@ public class Conductor : MonoBehaviour
     {
         return loopPositionInBeats;
     }
+
+    public float getBeatsCount()
+    {
+        return beatsPerLoop;
+    }
 }

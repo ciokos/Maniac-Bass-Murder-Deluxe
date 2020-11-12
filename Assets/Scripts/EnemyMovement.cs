@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EnemyMovement : MonoBehaviour
 {
 
@@ -9,10 +10,17 @@ public class EnemyMovement : MonoBehaviour
     private Vector2 movement;
     private int angle = 90;
     private Transform target;
+    private Conductor conductor;
+    private int beatsPerLoop;
+    private int directionChangeBeat;
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        conductor = (Conductor)GameObject.FindObjectOfType<Conductor>();
+        conductor.Beat.AddListener(onBeat);
+        beatsPerLoop = (int)conductor.getBeatsCount();
+        directionChangeBeat = getNextRandomBeat();
     }
 
     private void FixedUpdate()
@@ -34,5 +42,21 @@ public class EnemyMovement : MonoBehaviour
         v.x = (cos * tx) - (sin * ty);
         v.y = (sin * tx) + (cos * ty);
         return v;
+    }
+
+    private int getNextRandomBeat()
+    {
+        System.Random r = new System.Random();
+        int rInt = r.Next(0, beatsPerLoop);
+        return rInt;
+    }
+
+    private void onBeat(float beatValue)
+    {
+        if ((int)beatValue == directionChangeBeat)
+        {
+            angle = -angle;
+            directionChangeBeat = getNextRandomBeat();
+        }
     }
 }
