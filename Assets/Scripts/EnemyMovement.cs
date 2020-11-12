@@ -6,23 +6,33 @@ public class EnemyMovement : MonoBehaviour
 {
 
     public float moveSpeed = 0.1f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Vector2 movement;
+    private int angle = 90;
+    private Transform target;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void FixedUpdate()
     {
-        Vector2 movement = new Vector2(0.5f, 0.5f);
+        Vector2 forward = this.transform.position - target.position;
+
+        movement = Rotate(forward, angle);
         movement *= moveSpeed;
         movement *= Time.fixedDeltaTime;
         this.transform.position += new Vector3(movement.x, movement.y, 0);
+    }
+    private Vector2 Rotate(Vector2 v, float degrees)
+    {
+        float sin = Mathf.Sin(degrees * Mathf.Deg2Rad);
+        float cos = Mathf.Cos(degrees * Mathf.Deg2Rad);
+
+        float tx = v.x;
+        float ty = v.y;
+        v.x = (cos * tx) - (sin * ty);
+        v.y = (sin * tx) + (cos * ty);
+        return v;
     }
 }
