@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -23,10 +24,17 @@ public class Player : MonoBehaviour
     {
         currentHealth -= dmg;
         RefreshHealthText();
+        if (currentHealth <= 0)
+            GameOver();
     }
 
     private void RefreshHealthText()
     {
         healthText.text = ((int)currentHealth).ToString() + "/" + ((int)maxHealth).ToString();
+    }
+
+    private void GameOver()
+    {
+        SceneManager.LoadScene(2);
     }
 }
