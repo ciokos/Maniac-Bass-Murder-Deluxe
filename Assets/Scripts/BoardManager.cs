@@ -20,10 +20,11 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    public int columns = 8;
-    public int rows = 8;
-    public Count wallCount = new Count(5, 9);
-    // public GameObject exit;
+    public bool spawnTiles = true;
+
+    public int columns = 40;
+    public int rows = 40;
+    public Count wallCount = new Count(50, 200);
     // putting prefabs in these arrays
     public GameObject[] floorTiles;
     public GameObject[] wallTiles;
@@ -42,7 +43,7 @@ public class BoardManager : MonoBehaviour
         {
             for (int y = 1; y < rows -1; y++)
             {
-                gridPositions.Add(new Vector3(x, y, 0f));
+                gridPositions.Add(new Vector3(x / 5f, y / 5f, 0f));
             }
         }
     }
@@ -58,7 +59,7 @@ public class BoardManager : MonoBehaviour
                 if (x == -1 || x == columns || y == -1 || y == rows)
                     toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
 
-                GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+                GameObject instance = Instantiate(toInstantiate, new Vector3(x / 5f, y / 5f, 0f), Quaternion.identity) as GameObject;
 
                 instance.transform.SetParent(boardHolder);
             }
@@ -87,7 +88,10 @@ public class BoardManager : MonoBehaviour
 
     public void SetupScene(int level)
     {
-        BoardSetup();
+        if (spawnTiles)
+        {
+            BoardSetup();
+        }
         InitializeList();
         LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
         LayoutObjectAtRandom(ennemySpawnTiles, ennemyNumber, ennemyNumber);

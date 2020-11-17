@@ -18,7 +18,7 @@ TagManager:
   - 
   - 
   - Bullets
-  - 
+  - Playable
   - 
   - 
   - 
@@ -53,4 +53,7 @@ TagManager:
     locked: 0
   - name: SpawningLocation
     uniqueID: 4031428145
+    locked: 0
+  - name: Playable
+    uniqueID: 3741561861
     locked: 0
