@@ -6,13 +6,17 @@ public class GameManager : MonoBehaviour
 {
     public BoardManager boardScript;
 
+    public bool spawnBoard = true;
+
     private int level = 1;
     
     // Use this for initialization
     void Awake()
     {
-        boardScript = GetComponent<BoardManager>();
-        InitGame();
+        if (spawnBoard) {
+            boardScript = GetComponent<BoardManager>();
+            InitGame();
+        }
     }
 
     void InitGame()
