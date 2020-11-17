@@ -6,21 +6,23 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
 
-    public float moveSpeed = 0.1f;
+    public float moveSpeed = 1f;
     private Vector2 movement;
     private int angle = 90;
     private Transform target;
     private Conductor conductor;
     private int beatsPerLoop;
     private int directionChangeBeat;
-
+    private System.Random r;
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         conductor = (Conductor)GameObject.FindObjectOfType<Conductor>();
         conductor.Beat.AddListener(onBeat);
+        r = new System.Random((int)(this.transform.position.x*10) * (int)(this.transform.position.y * 10));
         beatsPerLoop = (int)conductor.getBeatsCount();
         directionChangeBeat = getNextRandomBeat();
+        
     }
 
     private void FixedUpdate()
@@ -46,7 +48,6 @@ public class EnemyMovement : MonoBehaviour
 
     private int getNextRandomBeat()
     {
-        System.Random r = new System.Random();
         int rInt = r.Next(0, beatsPerLoop);
         return rInt;
     }
