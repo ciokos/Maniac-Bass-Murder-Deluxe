@@ -29,14 +29,14 @@ public class Shooting : MonoBehaviour
     {
         if (!canShoot)
             return;
+        audioSource.Play();
         var power = GetShootPower();
-        Debug.Log("Shoot strength: " + power);
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        bullet.transform.localScale += new Vector3(power, power, 0);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         bullet.gameObject.tag = "PlayerBullet";
         bullet.GetComponent<Bullet>().SetDamage(20f * power);
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
-        audioSource.Play();
         canShoot = false;
         StartCoroutine(ShootDelay());
     }
