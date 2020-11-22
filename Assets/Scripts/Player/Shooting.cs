@@ -5,9 +5,12 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
     public Transform firePoint;
-    public GameObject bulletPrefab;
-    public float bulletForce = 20f;
+    public GameObject regularBulletPrefab;
+    public GameObject powerBulletPrefab;
+    public int bulletRegularForce = 1;
+    public int bulletPowerForce = 2;
     public float delay = 1f;
+    public float shot_accuracy = 0.2f;
     private bool canShoot = true;
     public AudioSource audioSource;
 
@@ -27,16 +30,40 @@ public class Shooting : MonoBehaviour
 
     void Shoot()
     {
+        // check if the player can shoot already
         if (!canShoot)
             return;
+        // play the sound
         audioSource.Play();
+
+        // get shot precision from the conductor
         var power = GetShootPower();
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        bullet.transform.localScale += new Vector3(power, power, 0);
+        GameObject chosenBulletPrefab;
+        int damage;
+
+        // is the shot empowered?
+        if(1 - power < shot_accuracy)
+        {
+            chosenBulletPrefab = powerBulletPrefab;
+            damage = bulletPowerForce;
+        }
+        else
+        {
+            chosenBulletPrefab = regularBulletPrefab;
+            damage = bulletRegularForce;
+        }
+
+        // spawn the bullet
+        GameObject bullet = Instantiate(chosenBulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+
+        // set tag
         bullet.gameObject.tag = "PlayerBullet";
-        bullet.GetComponent<Bullet>().SetDamage(20f * power);
-        rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        // set damage
+        bullet.GetComponent<Bullet>().SetDamage(damage);
+        // add force
+        rb.AddForce(firePoint.up * bulletRegularForce, ForceMode2D.Impulse);
+        // set delay
         canShoot = false;
         StartCoroutine(ShootDelay());
     }
@@ -47,6 +74,7 @@ public class Shooting : MonoBehaviour
         canShoot = true;
     }
 
+    // get power of the shot - float between 1 and 0
     private float GetShootPower()
     {
         var beat = conductor.getBeatValue();

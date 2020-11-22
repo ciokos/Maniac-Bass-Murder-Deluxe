@@ -223,7 +223,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: -553405435
+  m_SortingLayerID: 1154615347
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &17165952
@@ -662,9 +662,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1212767145}
-  bulletPrefab: {fileID: 6969571981930566044, guid: 74363a93e95e22c40b7423cf5bd9f5c6, type: 3}
-  bulletForce: 8
+  regularBulletPrefab: {fileID: 6969571981930566044, guid: 74363a93e95e22c40b7423cf5bd9f5c6, type: 3}
+  powerBulletPrefab: {fileID: 6969571981930566044, guid: 370f6be268d1661418adb29e8b62e75e, type: 3}
+  bulletRegularForce: 1
+  bulletPowerForce: 2
   delay: 1
+  shot_accuracy: 0.2
   audioSource: {fileID: 1636495604}
 --- !u!114 &296640202
 MonoBehaviour:
@@ -678,8 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a9c2bbe3d8525948b9427a9969b6556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
+  maxHealth: 10
   healthText: {fileID: 0}
   hearts:
   - {fileID: 17165954}
@@ -689,6 +691,7 @@ MonoBehaviour:
   - {fileID: 1587361643}
   fullHeart: {fileID: 21300000, guid: 3fe51833b901e9b4f979af5ba5639f6a, type: 3}
   emptyHeart: {fileID: 21300000, guid: 498599ced64750945b4dfc50e7b0cc73, type: 3}
+  halfHeart: {fileID: 21300000, guid: 5681eb1e61a240946ba3963ccdd88fca, type: 3}
 --- !u!61 &296640203
 BoxCollider2D:
   m_ObjectHideFlags: 0

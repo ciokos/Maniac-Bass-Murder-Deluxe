@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float damage;
-    public void SetDamage(float dmg)
+    private int damage;
+    public void SetDamage(int dmg)
     {
         damage = dmg;
     }

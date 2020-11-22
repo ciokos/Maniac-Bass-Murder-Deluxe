@@ -7,16 +7,16 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     public Transform firePoint;
-    public Text healthText;
     private Transform target;
     private Conductor conductor;
     public int[] beatsToShoot = { 3, 7, 11, 15 };
     public GameObject bulletPrefab;
     public float bulletForce = 20f;
+    public int bulletDamage = 1;
     public AudioSource audioSource;
 
-    private readonly float maxHealth = 100f;
-    private float currentHealth;
+    public int maxHealth = 2;
+    private int currentHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +25,6 @@ public class Enemy : MonoBehaviour
         conductor = (Conductor)GameObject.FindObjectOfType<Conductor>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         conductor.Beat.AddListener(onBeat);
-        RefreshHealthText();
     }
 
     // Update is called once per frame
@@ -51,23 +50,17 @@ public class Enemy : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         bullet.gameObject.tag = "EnemyBullet";
-        bullet.GetComponent<Bullet>().SetDamage(10f);
+        bullet.GetComponent<Bullet>().SetDamage(bulletDamage);
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
         audioSource.Play();
     }
 
-    public void TakeDamage(float dmg)
+    public void TakeDamage(int dmg)
     {
         currentHealth -= dmg;
         if(currentHealth <= 0)
         {
             Destroy(gameObject);
         }
-        RefreshHealthText();
-    }
-
-    private void RefreshHealthText()
-    {
-        healthText.text = ((int)currentHealth).ToString() + "/" + ((int)maxHealth).ToString();
     }
 }

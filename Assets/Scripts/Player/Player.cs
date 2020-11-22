@@ -6,32 +6,35 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-
-    public float maxHealth = 100f;
-    public float currentHealth;
-    private int maxHearts = 5;
-    private int currentHearts = 5;
-    public Text healthText;
-    private Conductor conductor;
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
+    public Sprite halfHeart;
+
+    private int maxHealth;
+    private int currentHealth;
+    private Conductor conductor;
+
 
     // Start is called before the first frame update
     void Start()
     {
         conductor = FindObjectOfType<Conductor>();
+        maxHealth = hearts.Length * 2;
         currentHealth = maxHealth;
-        SetHearts();
     }
 
     private void Update()
     {
         for(int i = 0; i < hearts.Length; i++)
         {
-            if(i < currentHearts)
+            if (2 * i + 1 == currentHealth)
             {
-                hearts[hearts.Length-i-1].sprite = fullHeart;
+                hearts[hearts.Length - i - 1].sprite = halfHeart;
+            }
+            else if (i * 2 < currentHealth)
+            {
+                hearts[hearts.Length - i - 1].sprite = fullHeart;
             }
             else
             {
@@ -40,10 +43,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float dmg)
+    public void TakeDamage(int dmg)
     {
         currentHealth -= dmg;
-        SetHearts();
         if (currentHealth <= 0)
             GameOver();
     }
@@ -51,10 +53,5 @@ public class Player : MonoBehaviour
     private void GameOver()
     {
         SceneManager.LoadScene(2);
-    }
-
-    private void SetHearts()
-    {
-        currentHearts = (int)Mathf.Ceil(currentHealth * maxHearts / maxHealth);
     }
 }
