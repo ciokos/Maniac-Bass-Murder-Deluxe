@@ -681,8 +681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a9c2bbe3d8525948b9427a9969b6556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  healthText: {fileID: 0}
   hearts:
   - {fileID: 17165954}
   - {fileID: 1012132520}
@@ -692,8 +690,8 @@ MonoBehaviour:
   fullHeart: {fileID: 21300000, guid: 3fe51833b901e9b4f979af5ba5639f6a, type: 3}
   emptyHeart: {fileID: 21300000, guid: 498599ced64750945b4dfc50e7b0cc73, type: 3}
   halfHeart: {fileID: 21300000, guid: 5681eb1e61a240946ba3963ccdd88fca, type: 3}
---- !u!61 &296640203
-BoxCollider2D:
+--- !u!58 &296640203
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -705,19 +703,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010725729, y: -0.010725737}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.4, y: 0.8}
-    newSize: {x: 0.4, y: 0.8}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: -0.01, y: -0.04}
   serializedVersion: 2
-  m_Size: {x: 0.1824209, y: 0.2514556}
-  m_EdgeRadius: 0
+  m_Radius: 0.09
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
