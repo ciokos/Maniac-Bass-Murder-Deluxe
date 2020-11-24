@@ -26,7 +26,7 @@ public class BoardManager : MonoBehaviour
     public int rows = 40;
     public Count wallCount = new Count(50, 200);
     // putting prefabs in these arrays
-    public GameObject[] floorTiles;
+    public GameObject[] floor;
     public GameObject[] wallTiles;
     public GameObject[] outerWallTiles;
     public GameObject[] ennemySpawnTiles;
@@ -51,17 +51,23 @@ public class BoardManager : MonoBehaviour
     void BoardSetup()
     {
         boardHolder = new GameObject("board").transform;
+        // spawn floor
+        GameObject toInstantiate = floor[Random.Range(0, floor.Length)];
+        Vector3 scaleChange = new Vector3(columns * 0.155f, rows * 0.155f, 0.0f);
+        GameObject instance = Instantiate(toInstantiate, new Vector3(columns * 0.1f, rows * 0.1f, 0.0f), Quaternion.identity) as GameObject;
+        instance.transform.localScale += scaleChange;
+        instance.transform.SetParent(boardHolder);
+        // spawn outer walls
         for (int x = -1; x < columns + 1; x++)
         {
             for (int y = -1; y < rows + 1; y++)
             {
-                GameObject toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
                 if (x == -1 || x == columns || y == -1 || y == rows)
-                    toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
-
-                GameObject instance = Instantiate(toInstantiate, new Vector3(x / 5f, y / 5f, 0f), Quaternion.identity) as GameObject;
-
-                instance.transform.SetParent(boardHolder);
+                {
+                    GameObject toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                    GameObject instance2 = Instantiate(toInstantiate2, new Vector3(x / 5f, y / 5f, 0f), Quaternion.identity) as GameObject;
+                    instance2.transform.SetParent(boardHolder);
+                } 
             }
         }
     }

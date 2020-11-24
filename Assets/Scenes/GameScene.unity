@@ -337,8 +337,8 @@ MonoBehaviour:
   wallCount:
     minimum: 50
     maximum: 200
-  floorTiles:
-  - {fileID: 1246909237538158564, guid: 9894efef2ba392240964b66701f5efe7, type: 3}
+  floor:
+  - {fileID: 1609988742701770594, guid: 3a4619e84d9c3674e8ac876807f26b98, type: 3}
   wallTiles:
   - {fileID: 855896928029014909, guid: 0593678f8803fc94ea7d76a6aa0ac134, type: 3}
   outerWallTiles:
