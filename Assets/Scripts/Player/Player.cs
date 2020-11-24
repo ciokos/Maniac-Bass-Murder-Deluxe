@@ -13,13 +13,11 @@ public class Player : MonoBehaviour
 
     private int maxHealth;
     private int currentHealth;
-    private Conductor conductor;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        conductor = FindObjectOfType<Conductor>();
         maxHealth = hearts.Length * 2;
         currentHealth = maxHealth;
     }

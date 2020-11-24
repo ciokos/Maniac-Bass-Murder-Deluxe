@@ -7,17 +7,20 @@ public class Shooting : MonoBehaviour
     public Transform firePoint;
     public GameObject regularBulletPrefab;
     public GameObject powerBulletPrefab;
+    public float bulletSpeed = 2f;
     public int bulletRegularForce = 1;
     public int bulletPowerForce = 2;
     public float delay = 1f;
     public float shot_accuracy = 0.2f;
     private bool canShoot = true;
     public AudioSource audioSource;
+    private PowerMultiplayer powerMultiplayer;
 
     private Conductor conductor;
     private void Start()
     {
         conductor = FindObjectOfType<Conductor>();
+        powerMultiplayer = FindObjectOfType<PowerMultiplayer>();
     }
     // Update is called once per frame
     void Update()
@@ -40,17 +43,21 @@ public class Shooting : MonoBehaviour
         var power = GetShootPower();
         GameObject chosenBulletPrefab;
         int damage;
+        bool isEmpowered;
 
         // is the shot empowered?
         if(1 - power < shot_accuracy)
         {
-            chosenBulletPrefab = powerBulletPrefab;
-            damage = bulletPowerForce;
+            chosenBulletPrefab = powerBulletPrefab; ;
+            damage = bulletPowerForce * powerMultiplayer.GetMultiplayer();
+            isEmpowered = true;
         }
         else
         {
             chosenBulletPrefab = regularBulletPrefab;
             damage = bulletRegularForce;
+            isEmpowered = false;
+            powerMultiplayer.ResetMultiplayer();
         }
 
         // spawn the bullet
@@ -59,10 +66,12 @@ public class Shooting : MonoBehaviour
 
         // set tag
         bullet.gameObject.tag = "PlayerBullet";
-        // set damage
-        bullet.GetComponent<Bullet>().SetDamage(damage);
+        // set damage and empowered status
+        bullet.GetComponent<Bullet>().SetBulletParameters(damage, isEmpowered);
+        // subscribe to enemy hit event
+        bullet.GetComponent<Bullet>().enemyHitEvent.AddListener(onEnemyHit);
         // add force
-        rb.AddForce(firePoint.up * bulletRegularForce, ForceMode2D.Impulse);
+        rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
         // set delay
         canShoot = false;
         StartCoroutine(ShootDelay());
@@ -81,5 +90,11 @@ public class Shooting : MonoBehaviour
         var diff = Mathf.Abs(beat - Mathf.Round(beat)) * 2;
         var power = 1 - diff;
         return power;
+    }
+
+    private void onEnemyHit(bool isEmpowered)
+    {
+        if (isEmpowered)
+            powerMultiplayer.IncreaseMultiplayerStep();
     }
 }
