@@ -24,9 +24,13 @@ public class BoardManager : MonoBehaviour
 
     public int columns = 40;
     public int rows = 40;
+
+    public int recursionDepth = 1;
+    public int doorCount = 1;
+
     public Count wallCount = new Count(50, 200);
     // putting prefabs in these arrays
-    public GameObject[] floor;
+    public GameObject floor;
     public GameObject[] wallTiles;
     public GameObject[] outerWallTiles;
     public GameObject[] ennemySpawnTiles;
@@ -51,12 +55,22 @@ public class BoardManager : MonoBehaviour
     void BoardSetup()
     {
         boardHolder = new GameObject("board").transform;
+
         // spawn floor
-        GameObject toInstantiate = floor[Random.Range(0, floor.Length)];
+        GameObject toInstantiate = floor;
         Vector3 scaleChange = new Vector3(columns * 0.155f, rows * 0.155f, 0.0f);
         GameObject instance = Instantiate(toInstantiate, new Vector3(columns * 0.1f, rows * 0.1f, 0.0f), Quaternion.identity) as GameObject;
         instance.transform.localScale += scaleChange;
         instance.transform.SetParent(boardHolder);
+        
+        // spawn door
+        int doorSet = 0;
+
+        bool isdoor()
+        {
+            return (Random.value < 0.05);
+        }
+
         // spawn outer walls
         for (int x = -1; x < columns + 1; x++)
         {
@@ -64,7 +78,16 @@ public class BoardManager : MonoBehaviour
             {
                 if (x == -1 || x == columns || y == -1 || y == rows)
                 {
-                    GameObject toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                    GameObject toInstantiate2;
+                    if (isdoor() && doorSet<doorCount)
+                    {
+                        toInstantiate2 = floor;
+                        doorSet++;
+                    }
+                    else
+                    {
+                        toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                    }
                     GameObject instance2 = Instantiate(toInstantiate2, new Vector3(x / 5f, y / 5f, 0f), Quaternion.identity) as GameObject;
                     instance2.transform.SetParent(boardHolder);
                 } 
