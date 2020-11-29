@@ -5,12 +5,10 @@ using UnityEngine.Events;
 
 
 [System.Serializable]
-public class HitEvent : UnityEvent<bool>
-{
-}
+public class HitEvent : UnityEvent<bool>{}
 public class Bullet : MonoBehaviour
 {
-    private int damage;
+    public int damage;
     private bool isEmpowered = false;
     public HitEvent enemyHitEvent;
 

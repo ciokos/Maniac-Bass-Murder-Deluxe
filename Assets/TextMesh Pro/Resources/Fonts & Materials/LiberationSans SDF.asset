@@ -30,8 +30,8 @@ Material:
     - _GradientScale: 10
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
-    - _OutlineSoftness: 0
-    - _OutlineWidth: 0.1
+    - _OutlineSoftness: 0.201
+    - _OutlineWidth: 0.264
     - _PerspectiveFilter: 0.875
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 1
@@ -47,7 +47,7 @@ Material:
     - _StencilWriteMask: 255
     - _TextureHeight: 1024
     - _TextureWidth: 1024
-    - _UnderlayDilate: 0
+    - _UnderlayDilate: 0.19
     - _UnderlayOffsetX: 0.58
     - _UnderlayOffsetY: 0.27
     - _UnderlaySoftness: 0.041
