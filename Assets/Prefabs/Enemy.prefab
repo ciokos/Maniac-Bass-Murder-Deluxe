@@ -110,7 +110,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.28, y: 1.96}
+  m_Size: {x: 0.4, y: 0.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -129,11 +129,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 4295481096613223282}
-  healthText: {fileID: 0}
   beatsToShoot: 03000000070000000b0000000f000000
   bulletPrefab: {fileID: 6969571981930566044, guid: eec2902c4c330cc4587b481fe2ce3eab, type: 3}
   bulletForce: 1
+  bulletDamage: 1
   audioSource: {fileID: 9072267041943076400}
+  maxHealth: 2
 --- !u!61 &337457867274027863
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -152,7 +153,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.4, y: 0.8}
-    newSize: {x: 2.28, y: 1.96}
+    newSize: {x: 0.4, y: 0.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
