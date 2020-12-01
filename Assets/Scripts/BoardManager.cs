@@ -53,6 +53,51 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+    public class Position
+    {
+        public int x;
+        public int y;
+
+        public Position()
+        {
+            x = 0;
+            y = 0;
+        }
+
+        public Position(int xv, int yv)
+        {
+            x = xv;
+            y = yv;
+        }
+
+        public Position(int orientation, int xv, int yv)
+        {
+            switch (orientation)
+            {
+                case (0):
+                    x = xv;
+                    y = yv;
+                    break;
+                case (-1):
+                    x = -yv;
+                    y = xv;
+                    break;
+                case (1):
+                    x = yv;
+                    y = -xv;
+                    break;
+                case (-2):
+                    x = -xv;
+                    y = -yv;
+                    break;
+                default:
+                    x = xv;
+                    y = yv;
+                    break;
+            }
+        }
+    }
+
     public bool spawnTiles = true;
 
     public int startingColumns = 40;
@@ -86,7 +131,7 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    void BoardSetup(Transform boardholder, int originX, int originY, int depth, int orientation, int columns, int rows)
+    void OuterWallsSetup(Transform boardholder, int originX, int originY, int depth, int orientation, int columns, int rows)
     {       
         // spawn floor
         GameObject toInstantiate = floor;
@@ -110,7 +155,8 @@ public class BoardManager : MonoBehaviour
                 int y = -1;
                 GameObject toInstantiate2;
                 toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
-                GameObject instance2 = Instantiate(toInstantiate2, new Vector3(x / 5f, y / 5f, 0f), Quaternion.identity) as GameObject;
+                Position rotatedPosition = new Position(orientation, x, y);
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3(rotatedPosition.x / 5f, rotatedPosition.y / 5f, 0f), Quaternion.identity) as GameObject;
                 instance2.transform.SetParent(boardHolder);
             }
         }
@@ -135,7 +181,8 @@ public class BoardManager : MonoBehaviour
             {
                 toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
             }
-            GameObject instance2 = Instantiate(toInstantiate2, new Vector3(x / 5f, y / 5f, 0f), Quaternion.identity) as GameObject;
+            Position rotatedPosition = new Position(orientation, x, y);
+            GameObject instance2 = Instantiate(toInstantiate2, new Vector3(rotatedPosition.x / 5f, rotatedPosition.y / 5f, 0f), Quaternion.identity) as GameObject;
             instance2.transform.SetParent(boardHolder);
         }
 
@@ -158,7 +205,8 @@ public class BoardManager : MonoBehaviour
             {
                 toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
             }
-            GameObject instance2 = Instantiate(toInstantiate2, new Vector3(x / 5f, y / 5f, 0f), Quaternion.identity) as GameObject;
+            Position rotatedPosition = new Position(orientation, x, y);
+            GameObject instance2 = Instantiate(toInstantiate2, new Vector3(rotatedPosition.x / 5f, rotatedPosition.y / 5f, 0f), Quaternion.identity) as GameObject;
             instance2.transform.SetParent(boardHolder);
         }
 
@@ -181,7 +229,8 @@ public class BoardManager : MonoBehaviour
             {
                 toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
             }
-            GameObject instance2 = Instantiate(toInstantiate2, new Vector3(x / 5f, y / 5f, 0f), Quaternion.identity) as GameObject;
+            Position rotatedPosition = new Position(orientation, x, y);
+            GameObject instance2 = Instantiate(toInstantiate2, new Vector3(rotatedPosition.x / 5f, rotatedPosition.y / 5f, 0f), Quaternion.identity) as GameObject;
             instance2.transform.SetParent(boardHolder);
         }
     }
@@ -212,7 +261,7 @@ public class BoardManager : MonoBehaviour
         boardHolder = new GameObject("board").transform;
         if (spawnTiles)
         {
-            BoardSetup(boardHolder, 0, 0, 0, 0, startingColumns, startingRows);
+            OuterWallsSetup(boardHolder, 0, 0, 0, 0, startingColumns, startingRows);
         }
         InitializeList(startingColumns, startingRows, 0, 0);
         LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
@@ -224,10 +273,10 @@ public class BoardManager : MonoBehaviour
             recursionDepth++;
             foreach (Door door in fakeDoorList)
             {
-                int localColumns = (int)Math.Pow((double)startingColumns, (double)(1 / recursionDepth));
-                int localRows = (int)Math.Pow((double)startingRows, (double)(1 / recursionDepth));
-                int localOriginX; // TODO
-                BoardSetup(boardHolder, 0, 0, recursionDepth, door.orientation, localColumns, localRows);
+                int localColumns = Random.Range((int)(startingColumns / (recursionDepth + 1)), startingColumns);
+                int localRows = Random.Range((int)(startingRows / (recursionDepth + 1)), startingRows);
+                Position localOrigin = new Position(door.orientation, door.xpos, door.ypos); // TODO
+                OuterWallsSetup(boardHolder, localOrigin.x, localOrigin.y, recursionDepth, door.orientation, localColumns, localRows);
             }
 
 

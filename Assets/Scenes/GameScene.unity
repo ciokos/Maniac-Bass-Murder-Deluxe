@@ -332,10 +332,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnTiles: 1
-  columns: 40
-  rows: 40
-  recursionDepth: 1
-  doorCount: 1
+  startingColumns: 40
+  startingRows: 40
+  maxRecursionDepth: 1
   wallCount:
     minimum: 50
     maximum: 200
