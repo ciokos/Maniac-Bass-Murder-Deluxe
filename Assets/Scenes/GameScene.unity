@@ -332,10 +332,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnTiles: 1
-  columns: 40
-  rows: 40
-  recursionDepth: 1
-  doorCount: 1
+  startingColumns: 40
+  startingRows: 40
+  maxRecursionDepth: 1
   wallCount:
     minimum: 50
     maximum: 200
@@ -587,7 +586,7 @@ SpriteRenderer:
   m_SortingLayerID: -553405435
   m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: bec3057aa8fd99243a8ad4d04cce3a98, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9b322f140feea01408b11010a1684b43, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -607,7 +606,7 @@ Transform:
   m_GameObject: {fileID: 296640196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 0.057750378, y: 0.057750378, z: 0}
   m_Children:
   - {fileID: 1212767145}
   - {fileID: 1636495603}
@@ -668,7 +667,7 @@ MonoBehaviour:
   bulletSpeed: 2
   bulletRegularForce: 1
   bulletPowerForce: 2
-  delay: 1
+  delay: 0.5
   shot_accuracy: 0.2
   audioSource: {fileID: 1636495604}
 --- !u!114 &296640202
@@ -705,9 +704,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01, y: -0.04}
+  m_Offset: {x: 0, y: -1}
   serializedVersion: 2
-  m_Radius: 0.09
+  m_Radius: 1.5
 --- !u!1 &434556200
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,7 +1117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1212767144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.008, y: 0.193, z: 0}
+  m_LocalPosition: {x: 0.75, y: 3.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 296640198}
