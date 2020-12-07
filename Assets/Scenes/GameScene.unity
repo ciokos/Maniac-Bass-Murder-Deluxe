@@ -334,11 +334,11 @@ MonoBehaviour:
   spawnTiles: 1
   startingColumns: 40
   startingRows: 40
-  maxRecursionDepth: 1
+  maxRecursionDepth: 3
+  doorLuck: 0.1
   wallCount:
     minimum: 50
     maximum: 200
-  floor: {fileID: 1609988742701770594, guid: 3a4619e84d9c3674e8ac876807f26b98, type: 3}
   wallTiles:
   - {fileID: 855896928029014909, guid: 0593678f8803fc94ea7d76a6aa0ac134, type: 3}
   outerWallTiles:

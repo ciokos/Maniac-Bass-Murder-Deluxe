@@ -32,23 +32,23 @@ public class BoardManager : MonoBehaviour
             ypos = y;
             orientation = direction;
         }
+    }
 
-        public int sum_orientation(int or1, int or2)
+    public int sumOrientation(int or1, int or2)
+    {
+        if (or1 + or2 < -2)
         {
-            if (or1 + or2 < -2)
+            return or1 + or2 + 4;
+        }
+        else
+        {
+            if (or1 + or2 > 1)
             {
-                return or1 + or2 + 4;
+                return or1 + or2 - 4;
             }
             else
             {
-                if (or1 + or2 > 1)
-                {
-                    return or1 + or2 - 4;
-                }
-                else
-                {
-                    return or2 + or1;
-                }
+                return or2 + or1;
             }
         }
     }
@@ -96,6 +96,34 @@ public class BoardManager : MonoBehaviour
                     break;
             }
         }
+
+        public Position sumPosition(Position nextPos, int orientation)
+        {
+            switch (orientation)
+            {
+                case (0):
+                    x += nextPos.x;
+                    y += nextPos.y;
+                    break;
+                case (-1):
+                    x += -nextPos.y;
+                    y += nextPos.x;
+                    break;
+                case (1):
+                    x += nextPos.y;
+                    y += -nextPos.x;
+                    break;
+                case (-2):
+                    x += -nextPos.x;
+                    y += -nextPos.y;
+                    break;
+                default:
+                    x += nextPos.x;
+                    y += nextPos.y;
+                    break;
+            }
+            return this;
+        }
     }
 
     public bool spawnTiles = true;
@@ -105,9 +133,10 @@ public class BoardManager : MonoBehaviour
 
     public int maxRecursionDepth = 1;
 
+    public float doorLuck = 0.1f;
+
     public Count wallCount = new Count(50, 200);
     // putting prefabs in these arrays
-    public GameObject floor;
     public GameObject[] wallTiles;
     public GameObject[] outerWallTiles;
     public GameObject[] ennemySpawnTiles;
@@ -134,16 +163,16 @@ public class BoardManager : MonoBehaviour
     void OuterWallsSetup(Transform boardholder, int originX, int originY, int depth, int orientation, int columns, int rows)
     {       
         // spawn floor
-        GameObject toInstantiate = floor;
+        /**GameObject toInstantiate = floor;
         Vector3 scaleChange = new Vector3(columns * 0.155f, rows * 0.155f, 0.0f);
         GameObject instance = Instantiate(toInstantiate, new Vector3(columns * 0.1f, rows * 0.1f, 0.0f), Quaternion.identity) as GameObject;
         instance.transform.localScale += scaleChange;
-        instance.transform.SetParent(boardHolder);
+        instance.transform.SetParent(boardHolder);**/
         
         // spawn door
         bool isdoor()
         {
-            return (Random.value < 0.05);
+            return (Random.value < doorLuck);
         }
 
         // spawn outer walls and doors
@@ -156,7 +185,7 @@ public class BoardManager : MonoBehaviour
                 GameObject toInstantiate2;
                 toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
                 Position rotatedPosition = new Position(orientation, x, y);
-                GameObject instance2 = Instantiate(toInstantiate2, new Vector3(rotatedPosition.x / 5f, rotatedPosition.y / 5f, 0f), Quaternion.identity) as GameObject;
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3((rotatedPosition.x + originX) / 5f, (rotatedPosition.y + originY) / 5f, 0f), Quaternion.identity) as GameObject;
                 instance2.transform.SetParent(boardHolder);
             }
         }
@@ -169,21 +198,19 @@ public class BoardManager : MonoBehaviour
         {
             int x = -1;
             
-            GameObject toInstantiate2;
-
-            if (y > -1 && y < rows && isdoor() && westDoorSet < westDoorCount)
+            if (y > rows / 3 && y < 2 * rows / 3 && isdoor() && westDoorSet < westDoorCount)
             {
-                toInstantiate2 = floor;
                 westDoorSet++;
-                doorList.Add(new Door(x, y, -1));
+                Position newDoorPosition = new Position(orientation, originX, originY).sumPosition(new Position(x, y), 0);
+                doorList.Add(new Door(newDoorPosition.x, newDoorPosition.y, sumOrientation(orientation, - 1)));
             } 
             else
             {
-                toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                GameObject toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                Position rotatedPosition = new Position(orientation, x, y);
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3((rotatedPosition.x + originX) / 5f, (rotatedPosition.y + originY) / 5f, 0f), Quaternion.identity) as GameObject;
+                instance2.transform.SetParent(boardHolder);
             }
-            Position rotatedPosition = new Position(orientation, x, y);
-            GameObject instance2 = Instantiate(toInstantiate2, new Vector3(rotatedPosition.x / 5f, rotatedPosition.y / 5f, 0f), Quaternion.identity) as GameObject;
-            instance2.transform.SetParent(boardHolder);
         }
 
         // spawn east wall with door
@@ -193,21 +220,19 @@ public class BoardManager : MonoBehaviour
         {
             int x = columns + 1;
             
-            GameObject toInstantiate2;
-
-            if (y > -1 && y < rows && isdoor() && eastDoorSet < eastDoorCount)
+            if (y > rows / 3 && y < 2 * rows / 3 && isdoor() && eastDoorSet < eastDoorCount)
             {
-                toInstantiate2 = floor;
                 eastDoorSet++;
-                doorList.Add(new Door(x, y, 1));
+                Position newDoorPosition = new Position(orientation, originX, originY).sumPosition(new Position(x, y), 0);
+                doorList.Add(new Door(newDoorPosition.x, newDoorPosition.y, sumOrientation(orientation, 1)));
             }
             else
             {
-                toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                GameObject toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                Position rotatedPosition = new Position(orientation, x, y);
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3((rotatedPosition.x + originX) / 5f, (rotatedPosition.y + originY) / 5f, 0f), Quaternion.identity) as GameObject;
+                instance2.transform.SetParent(boardHolder);
             }
-            Position rotatedPosition = new Position(orientation, x, y);
-            GameObject instance2 = Instantiate(toInstantiate2, new Vector3(rotatedPosition.x / 5f, rotatedPosition.y / 5f, 0f), Quaternion.identity) as GameObject;
-            instance2.transform.SetParent(boardHolder);
         }
 
         // spawn north wall with door
@@ -217,21 +242,19 @@ public class BoardManager : MonoBehaviour
         {
             int y = rows + 1;
 
-            GameObject toInstantiate2;
-
-            if (x > -1 && x < columns && isdoor() && northDoorSet < northDoorCount)
+            if (x > columns / 3 && x < 2 * columns / 3 && isdoor() && northDoorSet < northDoorCount)
             {
-                toInstantiate2 = floor;
                 northDoorSet++;
-                doorList.Add(new Door(x, y, 0));
+                Position newDoorPosition = new Position(orientation, originX, originY).sumPosition(new Position(x, y), 0);
+                doorList.Add(new Door(newDoorPosition.x, newDoorPosition.y, sumOrientation(orientation, 0)));
             }
             else
             {
-                toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                GameObject toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                Position rotatedPosition = new Position(orientation, x, y);
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3((rotatedPosition.x + originX) / 5f, (rotatedPosition.y + originY) / 5f, 0f), Quaternion.identity) as GameObject;
+                instance2.transform.SetParent(boardHolder);
             }
-            Position rotatedPosition = new Position(orientation, x, y);
-            GameObject instance2 = Instantiate(toInstantiate2, new Vector3(rotatedPosition.x / 5f, rotatedPosition.y / 5f, 0f), Quaternion.identity) as GameObject;
-            instance2.transform.SetParent(boardHolder);
         }
     }
 
@@ -273,10 +296,12 @@ public class BoardManager : MonoBehaviour
             recursionDepth++;
             foreach (Door door in fakeDoorList)
             {
-                int localColumns = Random.Range((int)(startingColumns / (recursionDepth + 1)), startingColumns);
+                int localColumns = Random.Range((int)(startingColumns / (recursionDepth + 1)), 2 * startingColumns / 3);
                 int localRows = Random.Range((int)(startingRows / (recursionDepth + 1)), startingRows);
-                Position localOrigin = new Position(door.orientation, door.xpos, door.ypos); // TODO
-                OuterWallsSetup(boardHolder, localOrigin.x, localOrigin.y, recursionDepth, door.orientation, localColumns, localRows);
+                Position offset = new Position(door.orientation, 1, 1); // putting the room at the exact right position
+                int localOriginX = door.xpos + offset.x;
+                int localOriginY = door.ypos + offset.y;
+                OuterWallsSetup(boardHolder, localOriginX, localOriginY, recursionDepth, door.orientation, localColumns, localRows);
             }
 
 
