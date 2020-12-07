@@ -8,6 +8,11 @@ public class MultiplayerModiferObject : MonoBehaviour
     public TMP_Text multiplayerText;
     private MultiplayerModifier modifier;
 
+    private void Start()
+    {
+        
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.name == "Player")

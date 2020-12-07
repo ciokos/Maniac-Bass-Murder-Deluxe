@@ -718,8 +718,8 @@ GameObject:
   - component: {fileID: 434556203}
   - component: {fileID: 434556202}
   - component: {fileID: 434556201}
-  m_Layer: 0
-  m_Name: Text (TMP)
+  m_Layer: 5
+  m_Name: MultiplayerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2135,7 +2135,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: -553405435
+  m_SortingLayerID: 1154615347
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &2088799055
