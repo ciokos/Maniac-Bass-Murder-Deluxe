@@ -2,6 +2,7 @@
 
 public class DelayModifierObject : MonoBehaviour
 {
+    public Sprite delayModifierSprite;
     private DelayModifier modifier;
 
     void OnTriggerEnter2D(Collider2D col)
@@ -9,7 +10,7 @@ public class DelayModifierObject : MonoBehaviour
         if(col.gameObject.name == "Player")
         {
             modifier = gameObject.AddComponent<DelayModifier>();
-            col.gameObject.GetComponent<Shooting>().AddModifier(modifier);
+            col.gameObject.GetComponent<Shooting>().AddModifier(modifier, delayModifierSprite);
             Destroy(gameObject);
         }
     }
