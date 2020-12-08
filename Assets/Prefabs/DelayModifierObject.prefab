@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6621241664975427001}
   - component: {fileID: 6621241664975427002}
-  - component: {fileID: 6621241664975427004}
+  - component: {fileID: 7985404532311607689}
   - component: {fileID: 6621241664975427000}
   - component: {fileID: 6621241664975427003}
   m_Layer: 9
-  m_Name: MultiplayerModifierObject
+  m_Name: DelayModifierObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: -553405435
   m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 479d5594030522641a09c425d010f271, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7a3843a73f828d34995a65753160abc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6621241664975427004
+--- !u!114 &7985404532311607689
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,10 +94,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6621241664975427005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d0b586d0e0f7fb4ebfcfce389a49332, type: 3}
+  m_Script: {fileID: 11500000, guid: b581cb0a9bc684f4bb23bdd9f3463b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplayerText: {fileID: 0}
 --- !u!50 &6621241664975427000
 Rigidbody2D:
   serializedVersion: 4
@@ -132,7 +131,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01437211, y: 0.0000010728836}
+  m_Offset: {x: 0.0025556087, y: 0.0000009536743}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -143,5 +142,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.2829137, y: 7.7836742}
+  m_Size: {x: 4.165684, y: 7.7836742}
   m_EdgeRadius: 0

@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IModifier 
 {
-    void Modify(List<GameObject> bullets, bool isEmpowered);
+    void Modify(List<BulletParameters> bulletsParameters);
     void EnemyHit(bool isEmpowered);
 }
