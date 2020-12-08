@@ -37,8 +37,6 @@ public class Shooting : MonoBehaviour
         // check if the player can shoot already
         if (!canShoot)
             return;
-        // play the sound
-        audioSource.Play();
 
         // get shot precision from the conductor
         var power = GetShootPower();
@@ -49,7 +47,7 @@ public class Shooting : MonoBehaviour
         // is the shot empowered?
         if(1 - power < shot_accuracy)
         {
-            chosenBulletPrefab = powerBulletPrefab; ;
+            chosenBulletPrefab = powerBulletPrefab;
             damage = bulletPowerForce;
             isEmpowered = true;
         }
@@ -60,29 +58,21 @@ public class Shooting : MonoBehaviour
             isEmpowered = false;
         }
 
-        // spawn the bullet
-        GameObject bullet = Instantiate(chosenBulletPrefab, firePoint.position, firePoint.rotation);
-        List<GameObject> bullets = new List<GameObject>();
-        bullets.Add(bullet);
 
-        // set tag
-        bullet.gameObject.tag = "PlayerBullet";
-        // set damage and empowered status
-        bullet.GetComponent<Bullet>().SetBulletParameters(damage, isEmpowered);
-        // subscribe to enemy hit event
-        bullet.GetComponent<Bullet>().enemyHitEvent.AddListener(onEnemyHit);
+        List<BulletParameters> bullets = new List<BulletParameters>
+        {
+            new BulletParameters(damage, isEmpowered, 0, chosenBulletPrefab, firePoint.position, firePoint.rotation, firePoint.up)
+        };
+
 
         // apply modifiers
-        foreach(IModifier modifier in modifiers)
+        foreach (IModifier modifier in modifiers)
         {
-            modifier.Modify(bullets, isEmpowered);
+            modifier.Modify(bullets);
         }
-
-        foreach(GameObject b in bullets)
+        foreach (BulletParameters bulletParameters in bullets)
         {
-            // add force
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
+            StartCoroutine(SpawnBullet(bulletParameters));
         }
 
         // set delay
@@ -117,4 +107,54 @@ public class Shooting : MonoBehaviour
     {
         modifiers.Add(modifier);
     }
+
+    private IEnumerator SpawnBullet(BulletParameters bulletParameters)
+    {
+        yield return new WaitForSeconds(bulletParameters.delay);
+        // play the sound
+        audioSource.Play();
+        // spawn the bullet
+        GameObject bullet = Instantiate(bulletParameters.chosenBulletPrefab, bulletParameters.position, bulletParameters.rotation);
+        // set tag
+        bullet.gameObject.tag = "PlayerBullet";
+        // set damage and empowered status
+        bullet.GetComponent<Bullet>().SetBulletParameters(bulletParameters.dmg, bulletParameters.isEmpowered);
+        // subscribe to enemy hit event
+        bullet.GetComponent<Bullet>().enemyHitEvent.AddListener(onEnemyHit);
+        // add force
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(bulletParameters.up * bulletSpeed, ForceMode2D.Impulse);
+    }
+}
+
+public class BulletParameters
+{
+    public BulletParameters(int dmg, bool isEmpowered, int delay, GameObject chosenBulletPrefab, Vector3 position, Quaternion rotation, Vector3 up)
+    {
+        this.dmg = dmg;
+        this.isEmpowered = isEmpowered;
+        this.delay = delay;
+        this.chosenBulletPrefab = chosenBulletPrefab;
+        this.position = position;
+        this.rotation = rotation;
+        this.up = up;
+    }
+
+    public BulletParameters(BulletParameters bulletParameters)
+    {
+        dmg = bulletParameters.dmg;
+        isEmpowered = bulletParameters.isEmpowered;
+        delay = bulletParameters.delay;
+        chosenBulletPrefab = bulletParameters.chosenBulletPrefab;
+        position = bulletParameters.position;
+        rotation = bulletParameters.rotation;
+        up = bulletParameters.up;
+    }
+    public int dmg;
+    public bool isEmpowered;
+    public float delay;
+    public GameObject chosenBulletPrefab;
+    public Vector3 position;
+    public Vector3 up;
+    public Quaternion rotation;
 }

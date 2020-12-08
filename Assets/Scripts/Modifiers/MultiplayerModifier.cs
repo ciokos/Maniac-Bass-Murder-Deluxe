@@ -9,15 +9,15 @@ public class MultiplayerModifier : IModifier
     public int multiplayer = 1;
     public int multiplayerSteps = 1;
     private int multiplayerCurrentStep = 0;
-    public void Modify(List<GameObject> bullets, bool isEmpowered)
+    public void Modify(List<BulletParameters> bullets)
     {
-        if(!isEmpowered)
+        if(!bullets[0].isEmpowered)
         {
             ResetMultiplayer();
         }
-        foreach(GameObject b in bullets)
+        foreach(BulletParameters b in bullets)
         {
-            b.GetComponent<Bullet>().damage *= GetMultiplayer();
+            b.dmg *= GetMultiplayer();
         }
     }
 
@@ -29,7 +29,7 @@ public class MultiplayerModifier : IModifier
 
     private void SetMultiplayerText()
     {
-        multiplayerText.text = "x" + multiplayer.ToString();
+        Debug.Log(multiplayer.ToString());
     }
     public int GetMultiplayer()
     {
