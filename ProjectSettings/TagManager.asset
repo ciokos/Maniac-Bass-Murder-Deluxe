@@ -8,6 +8,8 @@ TagManager:
   - EnemyBullet
   - PlayerBullet
   - Frame
+  - MultiplayerText
+  - NavMesh
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - 
   - Bullets
   - Playable
-  - 
+  - Map
   - 
   - 
   - 

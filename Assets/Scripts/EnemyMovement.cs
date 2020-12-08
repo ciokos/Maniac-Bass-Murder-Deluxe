@@ -1,63 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-
-    public float moveSpeed = 1f;
-    private Vector2 movement;
-    private int angle = 90;
     private Transform target;
-    private Conductor conductor;
-    private int beatsPerLoop;
-    private int directionChangeBeat;
-    private System.Random r;
+    private NavMeshAgent agent;
+    private bool isActive = false;
+    private Enemy enemy;
     private void Start()
     {
+        enemy = gameObject.GetComponent<Enemy>();
+        enemy.ActivateEvent.AddListener(onActivate);
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        conductor = (Conductor)GameObject.FindObjectOfType<Conductor>();
-        conductor.Beat.AddListener(onBeat);
-        r = new System.Random((int)(this.transform.position.x*10) * (int)(this.transform.position.y * 10));
-        beatsPerLoop = (int)conductor.getBeatsCount();
-        directionChangeBeat = getNextRandomBeat();
-        
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+        agent.enabled = false;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        Vector2 forward = this.transform.position - target.position;
-
-        movement = Rotate(forward, angle);
-        movement *= moveSpeed;
-        movement *= Time.fixedDeltaTime;
-        this.transform.position += new Vector3(movement.x, movement.y, 0);
+        if(isActive)
+            agent.SetDestination(target.position);
     }
-    private Vector2 Rotate(Vector2 v, float degrees)
+    private void onActivate()
     {
-        float sin = Mathf.Sin(degrees * Mathf.Deg2Rad);
-        float cos = Mathf.Cos(degrees * Mathf.Deg2Rad);
-
-        float tx = v.x;
-        float ty = v.y;
-        v.x = (cos * tx) - (sin * ty);
-        v.y = (sin * tx) + (cos * ty);
-        return v;
+        agent.enabled = true;
+        isActive = true; 
     }
 
-    private int getNextRandomBeat()
-    {
-        int rInt = r.Next(0, beatsPerLoop);
-        return rInt;
-    }
 
-    private void onBeat(float beatValue)
-    {
-        if ((int)beatValue == directionChangeBeat)
-        {
-            angle = -angle;
-            directionChangeBeat = getNextRandomBeat();
-        }
-    }
 }

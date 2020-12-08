@@ -10,7 +10,7 @@ public class MultiplayerModiferObject : MonoBehaviour
 
     private void Start()
     {
-        
+        multiplayerText = GameObject.FindGameObjectWithTag("MultiplayerText").GetComponent<TMP_Text>();
     }
 
     void OnTriggerEnter2D(Collider2D col)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class BoardManager : MonoBehaviour
@@ -145,7 +146,9 @@ public class BoardManager : MonoBehaviour
 
     public List<Door> doorList = new List<Door>();
 
-    private Transform boardHolder;
+    public NavMeshSurface2d surface2D;
+    public GameObject BoardHolder;
+
     private List<Vector3> gridPositions = new List<Vector3>();
 
     void InitializeList(int columns, int rows, int originX, int originY)
@@ -160,7 +163,7 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    void OuterWallsSetup(Transform boardholder, int originX, int originY, int depth, int orientation, int columns, int rows)
+    void OuterWallsSetup(int originX, int originY, int depth, int orientation, int columns, int rows)
     {       
         // spawn floor
         /**GameObject toInstantiate = floor;
@@ -185,8 +188,7 @@ public class BoardManager : MonoBehaviour
                 GameObject toInstantiate2;
                 toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
                 Position rotatedPosition = new Position(orientation, x, y);
-                GameObject instance2 = Instantiate(toInstantiate2, new Vector3((rotatedPosition.x + originX) / 5f, (rotatedPosition.y + originY) / 5f, 0f), Quaternion.identity) as GameObject;
-                instance2.transform.SetParent(boardHolder);
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3((rotatedPosition.x + originX) / 5f, (rotatedPosition.y + originY) / 5f, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
             }
         }
         
@@ -208,8 +210,7 @@ public class BoardManager : MonoBehaviour
             {
                 GameObject toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
                 Position rotatedPosition = new Position(orientation, x, y);
-                GameObject instance2 = Instantiate(toInstantiate2, new Vector3((rotatedPosition.x + originX) / 5f, (rotatedPosition.y + originY) / 5f, 0f), Quaternion.identity) as GameObject;
-                instance2.transform.SetParent(boardHolder);
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3((rotatedPosition.x + originX) / 5f, (rotatedPosition.y + originY) / 5f, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
             }
         }
 
@@ -230,8 +231,8 @@ public class BoardManager : MonoBehaviour
             {
                 GameObject toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
                 Position rotatedPosition = new Position(orientation, x, y);
-                GameObject instance2 = Instantiate(toInstantiate2, new Vector3((rotatedPosition.x + originX) / 5f, (rotatedPosition.y + originY) / 5f, 0f), Quaternion.identity) as GameObject;
-                instance2.transform.SetParent(boardHolder);
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3((rotatedPosition.x + originX) / 5f, (rotatedPosition.y + originY) / 5f, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
+
             }
         }
 
@@ -252,8 +253,7 @@ public class BoardManager : MonoBehaviour
             {
                 GameObject toInstantiate2 = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
                 Position rotatedPosition = new Position(orientation, x, y);
-                GameObject instance2 = Instantiate(toInstantiate2, new Vector3((rotatedPosition.x + originX) / 5f, (rotatedPosition.y + originY) / 5f, 0f), Quaternion.identity) as GameObject;
-                instance2.transform.SetParent(boardHolder);
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3((rotatedPosition.x + originX) / 5f, (rotatedPosition.y + originY) / 5f, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
             }
         }
     }
@@ -273,18 +273,16 @@ public class BoardManager : MonoBehaviour
         {
             Vector3 randomPosition = RandomPosition();
             GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
-            GameObject instance = Instantiate(tileChoice, randomPosition, Quaternion.identity) as GameObject;
-            instance.transform.SetParent(boardHolder);
+            GameObject instance = Instantiate(tileChoice, randomPosition, Quaternion.identity, BoardHolder.transform) as GameObject;
         }
     }
 
     public void SetupScene(int level)
     {
         int recursionDepth = 0;
-        boardHolder = new GameObject("board").transform;
         if (spawnTiles)
         {
-            OuterWallsSetup(boardHolder, 0, 0, 0, 0, startingColumns, startingRows);
+            OuterWallsSetup(0, 0, 0, 0, startingColumns, startingRows);
         }
         InitializeList(startingColumns, startingRows, 0, 0);
         LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
@@ -301,11 +299,9 @@ public class BoardManager : MonoBehaviour
                 Position offset = new Position(door.orientation, 1, 1); // putting the room at the exact right position
                 int localOriginX = door.xpos + offset.x;
                 int localOriginY = door.ypos + offset.y;
-                OuterWallsSetup(boardHolder, localOriginX, localOriginY, recursionDepth, door.orientation, localColumns, localRows);
+                OuterWallsSetup(localOriginX, localOriginY, recursionDepth, door.orientation, localColumns, localRows);
             }
-
-
-            
         }
+        surface2D.BuildNavMesh();
     }
 }
