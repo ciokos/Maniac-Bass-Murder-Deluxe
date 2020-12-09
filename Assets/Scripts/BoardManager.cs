@@ -140,9 +140,9 @@ public class BoardManager : MonoBehaviour
     // putting prefabs in these arrays
     public GameObject[] wallTiles;
     public GameObject[] outerWallTiles;
-    public GameObject[] ennemySpawnTiles;
+    public GameObject[] enemySpawnTiles;
 
-    public int ennemyNumber = 2;
+    public int enemyNumber = 2;
 
     public List<Door> doorList = new List<Door>();
 
@@ -286,7 +286,7 @@ public class BoardManager : MonoBehaviour
         }
         InitializeList(startingColumns, startingRows, 0, 0);
         LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
-        LayoutObjectAtRandom(ennemySpawnTiles, ennemyNumber, ennemyNumber);
+        LayoutObjectAtRandom(enemySpawnTiles, enemyNumber, enemyNumber);
         while (recursionDepth < maxRecursionDepth) // add a criteria over doorList size
         {
             List<Door> fakeDoorList = new List<Door>(doorList);
