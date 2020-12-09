@@ -42,7 +42,7 @@ public class BoardManager : MonoBehaviour
             for (int y = 0; y < rows; y++)
             {
                 GameObject toInstantiate2;
-                toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length)];
+                toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length - 1)];
                 GameObject instance2 = Instantiate(toInstantiate2, new Vector3(x * 14, y * 14, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
             }
         }
