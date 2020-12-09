@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
 {
     public int damage;
     private bool isEmpowered = false;
+    private bool isTuned = false;
     public HitEvent enemyHitEvent;
 
     void Start()
@@ -22,10 +23,11 @@ public class Bullet : MonoBehaviour
         damage = dmg;
     }
 
-    public void SetBulletParameters(int dmg, bool isEmpowered)
+    public void SetBulletParameters(int dmg, bool isEmpowered, bool isTuned)
     {
         this.damage = dmg;
         this.isEmpowered = isEmpowered;
+        this.isTuned = isTuned;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -41,5 +43,12 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
         Destroy(gameObject);
+    }
+
+    private void FixedUpdate()
+    {
+        if (!isTuned)
+            return;
+
     }
 }

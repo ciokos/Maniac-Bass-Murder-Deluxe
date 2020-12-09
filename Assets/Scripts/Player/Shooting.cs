@@ -136,7 +136,7 @@ public class Shooting : MonoBehaviour
         // set tag
         bullet.gameObject.tag = "PlayerBullet";
         // set damage and empowered status
-        bullet.GetComponent<Bullet>().SetBulletParameters(bulletParameters.dmg, bulletParameters.isEmpowered);
+        bullet.GetComponent<Bullet>().SetBulletParameters(bulletParameters.dmg, bulletParameters.isEmpowered, bulletParameters.isTuned);
         // subscribe to enemy hit event
         bullet.GetComponent<Bullet>().enemyHitEvent.AddListener(onEnemyHit);
         // add force
@@ -175,4 +175,5 @@ public class BulletParameters
     public Vector3 position;
     public Vector3 up;
     public Quaternion rotation;
+    public bool isTuned = false;
 }
