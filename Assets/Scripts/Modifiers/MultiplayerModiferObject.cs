@@ -5,6 +5,7 @@ using TMPro;
 
 public class MultiplayerModiferObject : MonoBehaviour
 {
+    public Sprite multiplierModifierSprite;
     public TMP_Text multiplayerText;
     private MultiplayerModifier modifier;
 
@@ -18,7 +19,7 @@ public class MultiplayerModiferObject : MonoBehaviour
         if(col.gameObject.name == "Player")
         {
             modifier = new MultiplayerModifier(multiplayerText);
-            col.gameObject.GetComponent<Shooting>().AddModifier(modifier);
+            col.gameObject.GetComponent<Shooting>().AddModifier(modifier, multiplierModifierSprite);
             Destroy(gameObject);
         }
     }

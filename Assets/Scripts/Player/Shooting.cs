@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shooting : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject regularBulletPrefab;
     public GameObject powerBulletPrefab;
+    public AudioClip regularShotAudio;
+    public AudioClip powerShotAudio;
     public float bulletSpeed = 2f;
     public int bulletRegularForce = 1;
     public int bulletPowerForce = 2;
@@ -14,7 +17,8 @@ public class Shooting : MonoBehaviour
     public float shot_accuracy = 0.2f;
     private bool canShoot = true;
     public AudioSource audioSource;
-    
+    public Image[] modifiersSprites;
+
 
     private Conductor conductor;
     private List<IModifier> modifiers;
@@ -50,12 +54,14 @@ public class Shooting : MonoBehaviour
             chosenBulletPrefab = powerBulletPrefab;
             damage = bulletPowerForce;
             isEmpowered = true;
+            audioSource.clip = powerShotAudio;
         }
         else
         {
             chosenBulletPrefab = regularBulletPrefab;
             damage = bulletRegularForce;
             isEmpowered = false;
+            audioSource.clip = regularShotAudio;
         }
 
 
@@ -103,9 +109,21 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    public void AddModifier(IModifier modifier)
+    public void AddModifier(IModifier modifier, Sprite modifierSprite)
     {
         modifiers.Add(modifier);
+        for (int i = 0; i < modifiersSprites.Length; i++)
+        {
+            Debug.Log(modifierSprite);
+            if (modifiersSprites[i].sprite == null)
+            {
+                modifiersSprites[i].sprite = modifierSprite;
+                modifiersSprites[i].enabled = true;
+                Debug.Log(modifiersSprites[i].sprite);
+                break;
+            }
+
+        }
     }
 
     private IEnumerator SpawnBullet(BulletParameters bulletParameters)
