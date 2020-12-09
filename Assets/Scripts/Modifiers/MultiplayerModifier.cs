@@ -29,7 +29,7 @@ public class MultiplayerModifier : IModifier
 
     private void SetMultiplayerText()
     {
-        Debug.Log(multiplayer.ToString());
+        multiplayerText.text = "x" + multiplayer.ToString();
     }
     public int GetMultiplayer()
     {
