@@ -334,7 +334,7 @@ MonoBehaviour:
   spawnTiles: 1
   startingColumns: 40
   startingRows: 40
-  maxRecursionDepth: 3
+  maxRecursionDepth: 0
   doorLuck: 0.1
   wallCount:
     minimum: 50
