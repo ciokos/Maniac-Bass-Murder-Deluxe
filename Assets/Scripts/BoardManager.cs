@@ -29,6 +29,7 @@ public class BoardManager : MonoBehaviour
     public Count roomCount = new Count(5, 10);
     // putting prefabs in these arrays
     public GameObject[] roomPrefab;
+    private List<Vector3> RoomPositions = new List<Vector3>();
 
     public NavMeshSurface2d surface2D;
     public GameObject BoardHolder;
@@ -37,13 +38,23 @@ public class BoardManager : MonoBehaviour
 
     void SetupRooms()
     {
+        int roomNumber = 0;
+        // create first room
+        GameObject toInstantiate2;
+        toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length - 1)];
+        GameObject instance2 = Instantiate(toInstantiate2, new Vector3(0f, 0f, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
+        roomNumber++;
+        // create other rooms
         for (int x = 0; x < columns; x++)
         {
             for (int y = 0; y < rows; y++)
             {
-                GameObject toInstantiate2;
-                toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length - 1)];
-                GameObject instance2 = Instantiate(toInstantiate2, new Vector3(x * 14, y * 14, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
+                if ((x != 0 || y != 0) && roomNumber < roomCount.maximum)
+                {
+                    toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length - 1)];
+                    instance2 = Instantiate(toInstantiate2, new Vector3(x * 14, y * 14, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
+                    roomNumber++;
+                } 
             }
         }
     }
