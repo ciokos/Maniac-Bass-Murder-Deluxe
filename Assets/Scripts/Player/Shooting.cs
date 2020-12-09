@@ -8,6 +8,8 @@ public class Shooting : MonoBehaviour
     public Transform firePoint;
     public GameObject regularBulletPrefab;
     public GameObject powerBulletPrefab;
+    public AudioClip regularShotAudio;
+    public AudioClip powerShotAudio;
     public float bulletSpeed = 2f;
     public int bulletRegularForce = 1;
     public int bulletPowerForce = 2;
@@ -52,12 +54,14 @@ public class Shooting : MonoBehaviour
             chosenBulletPrefab = powerBulletPrefab;
             damage = bulletPowerForce;
             isEmpowered = true;
+            audioSource.clip = powerShotAudio;
         }
         else
         {
             chosenBulletPrefab = regularBulletPrefab;
             damage = bulletRegularForce;
             isEmpowered = false;
+            audioSource.clip = regularShotAudio;
         }
 
 

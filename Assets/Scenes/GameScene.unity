@@ -683,6 +683,8 @@ MonoBehaviour:
   firePoint: {fileID: 1212767145}
   regularBulletPrefab: {fileID: 6969571981930566044, guid: 74363a93e95e22c40b7423cf5bd9f5c6, type: 3}
   powerBulletPrefab: {fileID: 6969571981930566044, guid: 370f6be268d1661418adb29e8b62e75e, type: 3}
+  regularShotAudio: {fileID: 8300000, guid: 25ee66760ef512d4f80c3b1291bad487, type: 3}
+  powerShotAudio: {fileID: 8300000, guid: 2546be42b93c2d8468cbbe37fc5d5657, type: 3}
   bulletSpeed: 2
   bulletRegularForce: 1
   bulletPowerForce: 2
@@ -1936,7 +1938,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 09b9731d4adf9b044ab93916d3a4872c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 25ee66760ef512d4f80c3b1291bad487, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2266,7 +2268,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 04bf1c6ea2cf4334e9852a04fdf94c1a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d5a9e50552076d54caa952a6c4c16b30, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
