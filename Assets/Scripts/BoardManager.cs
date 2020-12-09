@@ -34,7 +34,17 @@ public class BoardManager : MonoBehaviour
     public NavMeshSurface2d surface2D;
     public GameObject BoardHolder;
 
-    private List<Vector3> gridPositions = new List<Vector3>();
+    bool RoomAdjacent(List<Vector3> positions, int x, int y)
+    {
+        foreach (Vector3 position in positions)
+        {
+            if (position.x + 1 == x || position.x - 1 == x || position.y - 1 == y || position.y + 1 == y)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     void SetupRooms()
     {
@@ -44,12 +54,13 @@ public class BoardManager : MonoBehaviour
         toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length - 1)];
         GameObject instance2 = Instantiate(toInstantiate2, new Vector3(0f, 0f, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
         roomNumber++;
+        RoomPositions.Add(new Vector3(0f, 0f, 0f));
         // create other rooms
         for (int x = 0; x < columns; x++)
         {
             for (int y = 0; y < rows; y++)
             {
-                if ((x != 0 || y != 0) && roomNumber < roomCount.maximum)
+                if ((x != 0 || y != 0) && roomNumber < roomCount.maximum && RoomAdjacent(RoomPositions, x, y))
                 {
                     toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length - 1)];
                     instance2 = Instantiate(toInstantiate2, new Vector3(x * 14, y * 14, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
@@ -59,7 +70,7 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    void InitializeList()
+    /**void InitializeList()
     {
         gridPositions.Clear();
         for (int x = 1; x < columns -1; x++)
@@ -89,7 +100,7 @@ public class BoardManager : MonoBehaviour
             GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
             GameObject instance = Instantiate(tileChoice, randomPosition, Quaternion.identity, BoardHolder.transform) as GameObject;
         }
-    }
+    }**/
 
     public void SetupScene(int level)
     {
