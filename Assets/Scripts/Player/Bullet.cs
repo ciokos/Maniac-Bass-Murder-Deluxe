@@ -50,7 +50,7 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isTuned && !gameObject.CompareTag("PlayerBullet"))
+        if (!isTuned || !gameObject.CompareTag("PlayerBullet"))
             return;
         GameObject closestEnemy = FindClosestEnemy();
         Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
