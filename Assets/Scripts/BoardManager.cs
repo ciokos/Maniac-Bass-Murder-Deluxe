@@ -26,22 +26,29 @@ public class BoardManager : MonoBehaviour
     public int columns = 4;
     public int rows = 4;
 
+    public float roomLuck = 0.5f;
+
     public Count roomCount = new Count(5, 10);
     // putting prefabs in these arrays
     public GameObject[] roomPrefab;
     public GameObject wallPrefab;
     public GameObject[] enemyPrefab;
-    private List<Vector3> RoomPositions = new List<Vector3>();
+    public List<Vector3> RoomPositions = new List<Vector3>();
     private List<GameObject> enemyList = new List<GameObject>();
 
     public NavMeshSurface2d surface2D;
     public GameObject BoardHolder;
 
+    bool randomRoom()
+    {
+        return (Random.value < roomLuck);
+    }
+
     bool RoomAdjacent(List<Vector3> positions, int x, int y)
     {
         foreach (Vector3 position in positions)
         {
-            if (position.x + 1 == x || position.x - 1 == x || position.y - 1 == y || position.y + 1 == y)
+            if ((position.x + 1 == x && position.y == y) || (position.x - 1 == x && position.y == y) || (position.x == x && position.y - 1 == y) || (position.x == x && position.y + 1 == y))
             {
                 return true;
             }
@@ -54,22 +61,22 @@ public class BoardManager : MonoBehaviour
         foreach (Vector3 position in positions)
         {
             GameObject toInstantiate2 = wallPrefab;
-            // north
+            // east
             if (!positions.Contains(new Vector3(position.x + 1, position.y, 0f)))
             {
                 GameObject instance2 = Instantiate(toInstantiate2, new Vector3(position.x * 14 + 14, position.y * 14 + 6, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
             }
-            // south
+            // west
             if (!positions.Contains(new Vector3(position.x - 1, position.y, 0f)))
             {
                 GameObject instance2 = Instantiate(toInstantiate2, new Vector3(position.x * 14, position.y * 14 + 6, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
             }
-            // east
+            // north
             if (!positions.Contains(new Vector3(position.x, position.y + 1, 0f)))
             {
                 GameObject instance2 = Instantiate(toInstantiate2, new Vector3(position.x * 14 + 7, position.y * 14 + 13, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
             }
-            // west
+            // south
             if (!positions.Contains(new Vector3(position.x, position.y - 1, 0f)))
             {
                 GameObject instance2 = Instantiate(toInstantiate2, new Vector3(position.x * 14 + 7, position.y * 14 - 1, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
@@ -91,7 +98,7 @@ public class BoardManager : MonoBehaviour
         {
             for (int y = 0; y < rows; y++)
             {
-                if ((x != 0 || y != 0) && roomNumber < roomCount.maximum && RoomAdjacent(RoomPositions, x, y))
+                if ((x != 0 || y != 0) && roomNumber < roomCount.maximum && randomRoom() && RoomAdjacent(RoomPositions, x, y))
                 {
                     toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length - 1)];
                     instance2 = Instantiate(toInstantiate2, new Vector3(x * 14, y * 14, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
