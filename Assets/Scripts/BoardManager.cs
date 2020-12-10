@@ -29,6 +29,7 @@ public class BoardManager : MonoBehaviour
     public Count roomCount = new Count(5, 10);
     // putting prefabs in these arrays
     public GameObject[] roomPrefab;
+    public GameObject wallPrefab;
     public GameObject[] enemyPrefab;
     private List<Vector3> RoomPositions = new List<Vector3>();
     private List<GameObject> enemyList = new List<GameObject>();
@@ -46,6 +47,34 @@ public class BoardManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    void CloseDoor(List<Vector3> positions)
+    {
+        foreach (Vector3 position in positions)
+        {
+            GameObject toInstantiate2 = wallPrefab;
+            // north
+            if (!positions.Contains(new Vector3(position.x + 1, position.y, 0f)))
+            {
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3(position.x * 14 + 14, position.y * 14 + 6, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
+            }
+            // south
+            if (!positions.Contains(new Vector3(position.x - 1, position.y, 0f)))
+            {
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3(position.x * 14, position.y * 14 + 6, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
+            }
+            // east
+            if (!positions.Contains(new Vector3(position.x, position.y + 1, 0f)))
+            {
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3(position.x * 14 + 7, position.y * 14 + 13, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
+            }
+            // west
+            if (!positions.Contains(new Vector3(position.x, position.y - 1, 0f)))
+            {
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3(position.x * 14 + 7, position.y * 14 - 1, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
+            }
+        }
     }
 
     void SetupRooms()
@@ -67,6 +96,7 @@ public class BoardManager : MonoBehaviour
                     toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length - 1)];
                     instance2 = Instantiate(toInstantiate2, new Vector3(x * 14, y * 14, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
                     roomNumber++;
+                    RoomPositions.Add(new Vector3(x, y, 0f));
                 } 
             }
         }
@@ -93,6 +123,7 @@ public class BoardManager : MonoBehaviour
         if (spawnRooms)
         {
             SetupRooms();
+            CloseDoor(RoomPositions);
             SpawnEnnemies();
         }
         surface2D.BuildNavMesh();
