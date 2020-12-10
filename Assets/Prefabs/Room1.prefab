@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 4135532303049338745}
   m_Layer: 0
   m_Name: SpawningLocation (3)
-  m_TagString: Untagged
+  m_TagString: SpawnLocation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4911,7 +4911,7 @@ GameObject:
   - component: {fileID: 8278522112137377525}
   m_Layer: 0
   m_Name: SpawningLocation (1)
-  m_TagString: Untagged
+  m_TagString: SpawnLocation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6055,7 +6055,7 @@ GameObject:
   - component: {fileID: 7305969614727198967}
   m_Layer: 0
   m_Name: SpawningLocation (2)
-  m_TagString: Untagged
+  m_TagString: SpawnLocation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7703,7 +7703,7 @@ GameObject:
   - component: {fileID: 5642861092005281452}
   m_Layer: 0
   m_Name: SpawningLocation
-  m_TagString: Untagged
+  m_TagString: SpawnLocation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

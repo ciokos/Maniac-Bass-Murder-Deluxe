@@ -29,7 +29,9 @@ public class BoardManager : MonoBehaviour
     public Count roomCount = new Count(5, 10);
     // putting prefabs in these arrays
     public GameObject[] roomPrefab;
+    public GameObject[] enemyPrefab;
     private List<Vector3> RoomPositions = new List<Vector3>();
+    private List<GameObject> enemyList = new List<GameObject>();
 
     public NavMeshSurface2d surface2D;
     public GameObject BoardHolder;
@@ -70,43 +72,28 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    /**void InitializeList()
+    void SpawnEnnemies()
     {
-        gridPositions.Clear();
-        for (int x = 1; x < columns -1; x++)
+        // getting the spawn positions from the prefabs
+        GameObject[] spawnArray = GameObject.FindGameObjectsWithTag("SpawnLocation");
+        List<Vector3> spawnLocationList = new List<Vector3>();
+        foreach (GameObject spawnL in spawnArray)
         {
-            for (int y = 1; y < rows -1; y++)
-            {
-                gridPositions.Add(new Vector3(x, y, 0f));
-            }
+            Vector3 spawnPoint = spawnL.transform.position;
+            GameObject toInstantiate3;
+            toInstantiate3 = enemyPrefab[Random.Range(0, enemyPrefab.Length - 1)];
+            GameObject instance3 = Instantiate(toInstantiate3, spawnPoint, Quaternion.identity, BoardHolder.transform) as GameObject;
+            enemyList.Add(instance3);
         }
+        
     }
-
-
-    Vector3 RandomPosition()
-    {
-        int randomIndex = Random.Range(0, gridPositions.Count);
-        Vector3 randomPositions = gridPositions[randomIndex];
-        gridPositions.RemoveAt(randomIndex);
-        return randomPositions;
-    }
-
-    void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum)
-    {
-        int objectCount = Random.Range(minimum, maximum + 1);
-        for (int i = 0; i < objectCount; i++)
-        {
-            Vector3 randomPosition = RandomPosition();
-            GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
-            GameObject instance = Instantiate(tileChoice, randomPosition, Quaternion.identity, BoardHolder.transform) as GameObject;
-        }
-    }**/
 
     public void SetupScene(int level)
     {
         if (spawnRooms)
         {
             SetupRooms();
+            SpawnEnnemies();
         }
         surface2D.BuildNavMesh();
     }

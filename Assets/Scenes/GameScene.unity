@@ -338,7 +338,9 @@ MonoBehaviour:
     minimum: 5
     maximum: 10
   roomPrefab:
-  - {fileID: 7086162241043104533, guid: e46aabd919d01404a89619702dc2329f, type: 3}
+  - {fileID: 2982396947363841583, guid: e46aabd919d01404a89619702dc2329f, type: 3}
+  enemyPrefab:
+  - {fileID: 3278484700363382266, guid: 455513846f64f864fa5b2f8581000585, type: 3}
   surface2D: {fileID: 805624120}
   BoardHolder: {fileID: 805624119}
 --- !u!114 &77875665
