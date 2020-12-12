@@ -5,13 +5,14 @@ using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using System;
 
 public class Enemy : MonoBehaviour
 {
     public Transform firePoint;
     private Transform target;
     private Conductor conductor;
-    public int[] beatsToShoot = { 3, 7, 11, 15 };
+    public decimal[] beatsToShoot = { 3, 7, 11, 15 };
     public GameObject bulletPrefab;
     public float bulletForce = 20f;
     public int bulletDamage = 1;
@@ -33,7 +34,7 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
         conductor = (Conductor)GameObject.FindObjectOfType<Conductor>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        conductor.Beat.AddListener(onBeat);
+        conductor.Beat.AddListener(onInterval);
 
         if (ActivateEvent == null)
             ActivateEvent = new UnityEvent();
@@ -52,11 +53,11 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void onBeat(float beatValue)
+    private void onInterval(decimal beatValue)
     {
         if(isActive)
         {
-            int beat = (int)beatValue;
+            decimal beat = Math.Round(beatValue, 2);
             if (beatsToShoot.Contains(beat))
             {
                 Shoot();

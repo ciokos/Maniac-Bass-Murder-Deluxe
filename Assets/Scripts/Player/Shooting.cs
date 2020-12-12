@@ -95,7 +95,7 @@ public class Shooting : MonoBehaviour
     // get power of the shot - float between 1 and 0
     private float GetShootPower()
     {
-        var beat = conductor.getBeatValue();
+        var beat = (float)conductor.getBeatValue();
         var diff = Mathf.Abs(beat - Mathf.Round(beat)) * 2;
         var power = 1 - diff;
         return power;

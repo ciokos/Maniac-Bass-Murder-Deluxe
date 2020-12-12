@@ -21,7 +21,7 @@ public class MetronomeFrame : MonoBehaviour
         color2 = new Color(0.7830189f, 0.1433072f, 0.2682463f, 1f);
     }
 
-    private void onBeat(float beatValue)
+    private void onBeat(decimal beatValue)
     {
         foreach(GameObject i in images){
             if(color)
