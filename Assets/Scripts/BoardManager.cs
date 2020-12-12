@@ -26,15 +26,69 @@ public class BoardManager : MonoBehaviour
     public int columns = 4;
     public int rows = 4;
 
+    public float roomLuck = 0.5f;
+
     public Count roomCount = new Count(5, 10);
     // putting prefabs in these arrays
     public GameObject[] roomPrefab;
-    private List<Vector3> RoomPositions = new List<Vector3>();
+    public GameObject wallPrefab;
+    public GameObject[] enemyPrefab;
+    public List<Vector3> RoomPositions = new List<Vector3>();
+    private List<GameObject> enemyList = new List<GameObject>();
 
     public NavMeshSurface2d surface2D;
     public GameObject BoardHolder;
 
-    private List<Vector3> gridPositions = new List<Vector3>();
+    public bool NoEnemies()
+    {
+        Debug.Log(enemyList.Count);
+        return enemyList.Count < 1;
+    }
+
+    bool randomRoom()
+    {
+        return (Random.value < roomLuck);
+    }
+
+    bool RoomAdjacent(List<Vector3> positions, int x, int y)
+    {
+        foreach (Vector3 position in positions)
+        {
+            if ((position.x + 1 == x && position.y == y) || (position.x - 1 == x && position.y == y) || (position.x == x && position.y - 1 == y) || (position.x == x && position.y + 1 == y))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void CloseDoor(List<Vector3> positions)
+    {
+        foreach (Vector3 position in positions)
+        {
+            GameObject toInstantiate2 = wallPrefab;
+            // east
+            if (!positions.Contains(new Vector3(position.x + 1, position.y, 0f)))
+            {
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3(position.x * 14 + 14, position.y * 14 + 6, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
+            }
+            // west
+            if (!positions.Contains(new Vector3(position.x - 1, position.y, 0f)))
+            {
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3(position.x * 14, position.y * 14 + 6, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
+            }
+            // north
+            if (!positions.Contains(new Vector3(position.x, position.y + 1, 0f)))
+            {
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3(position.x * 14 + 7, position.y * 14 + 13, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
+            }
+            // south
+            if (!positions.Contains(new Vector3(position.x, position.y - 1, 0f)))
+            {
+                GameObject instance2 = Instantiate(toInstantiate2, new Vector3(position.x * 14 + 7, position.y * 14 - 1, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
+            }
+        }
+    }
 
     void SetupRooms()
     {
@@ -44,51 +98,37 @@ public class BoardManager : MonoBehaviour
         toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length - 1)];
         GameObject instance2 = Instantiate(toInstantiate2, new Vector3(0f, 0f, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
         roomNumber++;
+        RoomPositions.Add(new Vector3(0f, 0f, 0f));
         // create other rooms
         for (int x = 0; x < columns; x++)
         {
             for (int y = 0; y < rows; y++)
             {
-                if ((x != 0 || y != 0) && roomNumber < roomCount.maximum)
+                if ((x != 0 || y != 0) && roomNumber < roomCount.maximum && randomRoom() && RoomAdjacent(RoomPositions, x, y))
                 {
                     toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length - 1)];
                     instance2 = Instantiate(toInstantiate2, new Vector3(x * 14, y * 14, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
                     roomNumber++;
+                    RoomPositions.Add(new Vector3(x, y, 0f));
                 } 
             }
         }
     }
 
-    void InitializeList()
+    void SpawnEnnemies()
     {
-        gridPositions.Clear();
-        for (int x = 1; x < columns -1; x++)
+        // getting the spawn positions from the prefabs
+        GameObject[] spawnArray = GameObject.FindGameObjectsWithTag("SpawnLocation");
+        List<Vector3> spawnLocationList = new List<Vector3>();
+        foreach (GameObject spawnL in spawnArray)
         {
-            for (int y = 1; y < rows -1; y++)
-            {
-                gridPositions.Add(new Vector3(x, y, 0f));
-            }
+            Vector3 spawnPoint = spawnL.transform.position;
+            GameObject toInstantiate3;
+            toInstantiate3 = enemyPrefab[Random.Range(0, enemyPrefab.Length - 1)];
+            GameObject instance3 = Instantiate(toInstantiate3, spawnPoint, Quaternion.identity, BoardHolder.transform) as GameObject;
+            enemyList.Add(instance3);
         }
-    }
-
-
-    Vector3 RandomPosition()
-    {
-        int randomIndex = Random.Range(0, gridPositions.Count);
-        Vector3 randomPositions = gridPositions[randomIndex];
-        gridPositions.RemoveAt(randomIndex);
-        return randomPositions;
-    }
-
-    void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum)
-    {
-        int objectCount = Random.Range(minimum, maximum + 1);
-        for (int i = 0; i < objectCount; i++)
-        {
-            Vector3 randomPosition = RandomPosition();
-            GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
-            GameObject instance = Instantiate(tileChoice, randomPosition, Quaternion.identity, BoardHolder.transform) as GameObject;
-        }
+        
     }
 
     public void SetupScene(int level)
@@ -96,6 +136,8 @@ public class BoardManager : MonoBehaviour
         if (spawnRooms)
         {
             SetupRooms();
+            CloseDoor(RoomPositions);
+            SpawnEnnemies();
         }
         surface2D.BuildNavMesh();
     }

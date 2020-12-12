@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     private bool isEmpowered = false;
     private bool isTuned = false;
     public HitEvent enemyHitEvent;
+    private readonly float tuneFactor = 0.1f;
 
     void Start()
     {
@@ -42,13 +43,39 @@ public class Bullet : MonoBehaviour
             collision.gameObject.GetComponent<Player>().TakeDamage(damage);
             Destroy(gameObject);
         }
+        else if (collision.gameObject.CompareTag("Player") && gameObject.CompareTag("PlayerBullet"))
+            return;
         Destroy(gameObject);
     }
 
     private void FixedUpdate()
     {
-        if (!isTuned)
+        if (!isTuned || !gameObject.CompareTag("PlayerBullet"))
             return;
+        GameObject closestEnemy = FindClosestEnemy();
+        Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+        Vector3 dir = closestEnemy.transform.position - gameObject.transform.position;
+        rb.AddForce(dir * tuneFactor / dir.sqrMagnitude, ForceMode2D.Impulse);
+        rb.velocity.Normalize();
+    }
 
+    public GameObject FindClosestEnemy()
+    {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach (GameObject go in gos)
+        {
+            Vector3 diff = go.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance)
+            {
+                closest = go;
+                distance = curDistance;
+            }
+        }
+        return closest;
     }
 }
