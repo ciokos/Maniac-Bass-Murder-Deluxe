@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -98,6 +99,16 @@ public class Enemy : MonoBehaviour
         if(currentHealth <= 0)
         {
             Destroy(gameObject);
+            GameObject[] gos;
+            gos = GameObject.FindGameObjectsWithTag("Enemy");
+            Debug.Log(gos.Length);
+            if (gos.Length < 1)
+                GameWon();
         }
+    }
+
+    private void GameWon()
+    {
+        SceneManager.LoadScene(3);
     }
 }
