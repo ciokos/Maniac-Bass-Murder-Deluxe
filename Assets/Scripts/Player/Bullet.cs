@@ -53,6 +53,8 @@ public class Bullet : MonoBehaviour
         if (!isTuned || !gameObject.CompareTag("PlayerBullet"))
             return;
         GameObject closestEnemy = FindClosestEnemy();
+        if (closestEnemy == null)
+            return;
         Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
         Vector3 dir = closestEnemy.transform.position - gameObject.transform.position;
         rb.AddForce(dir * tuneFactor / dir.sqrMagnitude, ForceMode2D.Impulse);

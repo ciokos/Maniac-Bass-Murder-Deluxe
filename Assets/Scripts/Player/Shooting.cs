@@ -167,6 +167,7 @@ public class BulletParameters
         position = bulletParameters.position;
         rotation = bulletParameters.rotation;
         up = bulletParameters.up;
+        isTuned = bulletParameters.isTuned;
     }
     public int dmg;
     public bool isEmpowered;
