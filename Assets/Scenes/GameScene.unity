@@ -332,14 +332,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnRooms: 1
-  columns: 2
-  rows: 2
+  columns: 4
+  rows: 4
   roomLuck: 0.8
   roomCount:
     minimum: 20
     maximum: 40
   roomPrefab:
-  - {fileID: 2982396947363841583, guid: e46aabd919d01404a89619702dc2329f, type: 3}
+  - {fileID: 132311510505221402, guid: 0e2b72ff94eee62449656b7deb7a3e64, type: 3}
+  - {fileID: 7973111060606496596, guid: e46aabd919d01404a89619702dc2329f, type: 3}
   wallPrefab: {fileID: 855896928029014909, guid: 0593678f8803fc94ea7d76a6aa0ac134, type: 3}
   enemyPrefab:
   - {fileID: 3278484700363382266, guid: 455513846f64f864fa5b2f8581000585, type: 3}
