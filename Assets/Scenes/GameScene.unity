@@ -332,8 +332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnRooms: 1
-  columns: 1
-  rows: 1
+  columns: 2
+  rows: 2
   roomLuck: 0.8
   roomCount:
     minimum: 20
@@ -2414,6 +2414,9 @@ MonoBehaviour:
   completedLoops: 0
   loopPositionInAnalog: 0
   newLoopEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  Interval:
     m_PersistentCalls:
       m_Calls: []
   Beat:
