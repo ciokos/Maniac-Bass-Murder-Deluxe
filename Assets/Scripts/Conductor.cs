@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine;
 
 [System.Serializable]
-public class BeatEvent : UnityEvent<decimal>
+public class IntervalEvent : UnityEvent<decimal>
 {
 }
 
@@ -22,10 +22,12 @@ public class Conductor : MonoBehaviour
     public int completedLoops = 0;
     public decimal loopPositionInBeats;
     public float loopPositionInAnalog;
-    private decimal prevBeat = 0;
+    private decimal prevInterval = 0;
+    private int prevBeat = 0;
 
     public UnityEvent newLoopEvent;
-    public BeatEvent Beat; // Event invoked every beat
+    public IntervalEvent Interval; // Event invoked every interval
+    public UnityEvent Beat;
 
 
 
@@ -43,8 +45,11 @@ public class Conductor : MonoBehaviour
         if (newLoopEvent == null)
             newLoopEvent = new UnityEvent();
 
+        if (Interval == null)
+            Interval = new IntervalEvent();
+
         if (Beat == null)
-            Beat = new BeatEvent();
+            Beat = new UnityEvent();
 
     }
 
@@ -63,10 +68,16 @@ public class Conductor : MonoBehaviour
 
         decimal roundedPosition = Math.Round(loopPositionInBeats, 2);
 
-        if (roundedPosition != prevBeat && roundedPosition % (decimal)0.25 == 0 )
+        if (roundedPosition != prevInterval && roundedPosition % (decimal)0.25 == 0 )
         {
-            prevBeat = roundedPosition;
-            Beat.Invoke(loopPositionInBeats);
+            prevInterval = roundedPosition;
+            Interval.Invoke(loopPositionInBeats);
+        }
+
+        if((int)loopPositionInBeats != prevBeat)
+        {
+            prevBeat = (int)loopPositionInBeats;
+            Beat.Invoke();
         }
 
         loopPositionInAnalog = (float)loopPositionInBeats / beatsPerLoop;

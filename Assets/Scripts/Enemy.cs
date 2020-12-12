@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
         conductor = (Conductor)GameObject.FindObjectOfType<Conductor>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        conductor.Beat.AddListener(onInterval);
+        conductor.Interval.AddListener(onInterval);
 
         if (ActivateEvent == null)
             ActivateEvent = new UnityEvent();

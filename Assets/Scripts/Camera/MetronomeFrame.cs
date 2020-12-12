@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class MetronomeFrame : MonoBehaviour
 {
@@ -21,10 +22,11 @@ public class MetronomeFrame : MonoBehaviour
         color2 = new Color(0.7830189f, 0.1433072f, 0.2682463f, 1f);
     }
 
-    private void onBeat(decimal beatValue)
+    private void onBeat()
     {
-        foreach(GameObject i in images){
-            if(color)
+        foreach (GameObject i in images)
+        {
+            if (color)
                 i.GetComponent<Image>().color = color2;
             else
                 i.GetComponent<Image>().color = color1;
