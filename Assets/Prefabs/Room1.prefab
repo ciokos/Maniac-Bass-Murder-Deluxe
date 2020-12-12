@@ -136,7 +136,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1933336189635437125}
   - component: {fileID: 7858693107524044803}
-  - component: {fileID: 8936476151213234710}
   - component: {fileID: 4135532303049338745}
   m_Layer: 0
   m_Name: SpawningLocation (3)
@@ -210,32 +209,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8936476151213234710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 397287466778190934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 138e788c8b067a14a98dc129ae611675, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 0}
-  beatsToShoot: 03000000070000000b0000000f000000
-  bulletPrefab: {fileID: 0}
-  bulletForce: 20
-  bulletDamage: 1
-  audioSource: {fileID: 0}
-  viewDistance: 10
-  ActivateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  IgnoreInVision:
-    serializedVersion: 2
-    m_Bits: 0
-  maxHealth: 2
 --- !u!61 &4135532303049338745
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4907,7 +4880,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5860304949021391817}
   - component: {fileID: 2776685733925785999}
-  - component: {fileID: 4000277282317009818}
   - component: {fileID: 8278522112137377525}
   m_Layer: 0
   m_Name: SpawningLocation (1)
@@ -4981,32 +4953,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4000277282317009818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5621646344289910234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 138e788c8b067a14a98dc129ae611675, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 0}
-  beatsToShoot: 03000000070000000b0000000f000000
-  bulletPrefab: {fileID: 0}
-  bulletForce: 20
-  bulletDamage: 1
-  audioSource: {fileID: 0}
-  viewDistance: 10
-  ActivateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  IgnoreInVision:
-    serializedVersion: 2
-    m_Bits: 0
-  maxHealth: 2
 --- !u!61 &8278522112137377525
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6051,7 +5997,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5103931968955135435}
   - component: {fileID: 3535316561642135437}
-  - component: {fileID: 2307221411743436184}
   - component: {fileID: 7305969614727198967}
   m_Layer: 0
   m_Name: SpawningLocation (2)
@@ -6125,32 +6070,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2307221411743436184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6450046132137718744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 138e788c8b067a14a98dc129ae611675, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 0}
-  beatsToShoot: 03000000070000000b0000000f000000
-  bulletPrefab: {fileID: 0}
-  bulletForce: 20
-  bulletDamage: 1
-  audioSource: {fileID: 0}
-  viewDistance: 10
-  ActivateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  IgnoreInVision:
-    serializedVersion: 2
-    m_Bits: 0
-  maxHealth: 2
 --- !u!61 &7305969614727198967
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7699,7 +7618,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7926251740738941840}
   - component: {fileID: 1883783708611729878}
-  - component: {fileID: 806031382796094403}
   - component: {fileID: 5642861092005281452}
   m_Layer: 0
   m_Name: SpawningLocation
@@ -7773,32 +7691,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &806031382796094403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8261948261153584515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 138e788c8b067a14a98dc129ae611675, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 0}
-  beatsToShoot: 03000000070000000b0000000f000000
-  bulletPrefab: {fileID: 0}
-  bulletForce: 20
-  bulletDamage: 1
-  audioSource: {fileID: 0}
-  viewDistance: 10
-  ActivateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  IgnoreInVision:
-    serializedVersion: 2
-    m_Bits: 0
-  maxHealth: 2
 --- !u!61 &5642861092005281452
 BoxCollider2D:
   m_ObjectHideFlags: 0

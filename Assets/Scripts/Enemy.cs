@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     public Transform firePoint;
     private Transform target;
     private Conductor conductor;
-    public decimal[] beatsToShoot = { 3, 7, 11, 15 };
+    public float[] beatsToShoot = { 3, 7, 11, 15 };
     public GameObject bulletPrefab;
     public float bulletForce = 20f;
     public int bulletDamage = 1;
@@ -53,12 +53,11 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void onInterval(decimal beatValue)
+    private void onInterval(float beatValue)
     {
         if(isActive)
         {
-            decimal beat = Math.Round(beatValue, 2);
-            if (beatsToShoot.Contains(beat))
+            if (beatsToShoot.Contains(beatValue))
             {
                 Shoot();
             }
