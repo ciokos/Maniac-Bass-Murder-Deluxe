@@ -28,7 +28,6 @@ public class Enemy : MonoBehaviour
     private EnemyMovement movementComponent;
     private bool isActive = false;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -100,16 +99,6 @@ public class Enemy : MonoBehaviour
         if(currentHealth <= 0)
         {
             Destroy(gameObject);
-            GameObject[] gos;
-            gos = GameObject.FindGameObjectsWithTag("Enemy");
-            Debug.Log(gos.Length);
-            if (gos.Length < 1)
-                GameWon();
         }
-    }
-
-    private void GameWon()
-    {
-        SceneManager.LoadScene(3);
     }
 }
