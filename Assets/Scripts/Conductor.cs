@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine;
 
 [System.Serializable]
-public class IntervalEvent : UnityEvent<decimal>
+public class IntervalEvent : UnityEvent<float>
 {
 }
 
@@ -20,14 +20,17 @@ public class Conductor : MonoBehaviour
     public AudioSource audioSource;
     public float beatsPerLoop;
     public int completedLoops = 0;
-    public decimal loopPositionInBeats;
+    public float loopPositionInBeats;
     public float loopPositionInAnalog;
-    private decimal prevInterval = 0;
-    private int prevBeat = 0;
-
     public UnityEvent newLoopEvent;
     public IntervalEvent Interval; // Event invoked every interval
     public UnityEvent Beat;
+    public float beatUnit = 0.25f;
+
+    private float prevInterval = 0;
+    private int prevBeat = 0;
+
+
 
 
 
@@ -64,17 +67,17 @@ public class Conductor : MonoBehaviour
             completedLoops++;
             newLoopEvent.Invoke();
         }
-        loopPositionInBeats = (decimal)(songPositionInBeats - completedLoops * beatsPerLoop);
+        loopPositionInBeats = (songPositionInBeats - completedLoops * beatsPerLoop);
 
-        decimal roundedPosition = Math.Round(loopPositionInBeats, 2);
-
-        if (roundedPosition != prevInterval && roundedPosition % (decimal)0.25 == 0 )
+        if (loopPositionInBeats - prevInterval >= 0.25)
         {
-            prevInterval = roundedPosition;
-            Interval.Invoke(loopPositionInBeats);
+            prevInterval += 0.25f;
+            if (prevInterval >= beatsPerLoop)
+                prevInterval = 0;
+            Interval.Invoke(prevInterval);
         }
 
-        if((int)loopPositionInBeats != prevBeat)
+        if ((int)loopPositionInBeats != prevBeat)
         {
             prevBeat = (int)loopPositionInBeats;
             Beat.Invoke();
@@ -88,7 +91,7 @@ public class Conductor : MonoBehaviour
         return (int)loopPositionInBeats % 2 != 0;
     }
 
-    public decimal getBeatValue()
+    public float getBeatValue()
     {
         return loopPositionInBeats;
     }
