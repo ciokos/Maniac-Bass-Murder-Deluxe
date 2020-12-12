@@ -2412,7 +2412,6 @@ MonoBehaviour:
   audioSource: {fileID: 2024809684}
   beatsPerLoop: 16
   completedLoops: 0
-  loopPositionInBeats: 0
   loopPositionInAnalog: 0
   newLoopEvent:
     m_PersistentCalls:

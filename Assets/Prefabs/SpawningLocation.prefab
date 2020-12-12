@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5435390796421605252}
   - component: {fileID: 4374503331289861570}
-  - component: {fileID: 3296152870882320343}
   - component: {fileID: 7556662574942202552}
   m_Layer: 0
   m_Name: SpawningLocation
@@ -84,32 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3296152870882320343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6069030391115997591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 138e788c8b067a14a98dc129ae611675, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 0}
-  beatsToShoot: 03000000070000000b0000000f000000
-  bulletPrefab: {fileID: 0}
-  bulletForce: 20
-  bulletDamage: 1
-  audioSource: {fileID: 0}
-  viewDistance: 10
-  ActivateEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  IgnoreInVision:
-    serializedVersion: 2
-    m_Bits: 0
-  maxHealth: 2
 --- !u!61 &7556662574942202552
 BoxCollider2D:
   m_ObjectHideFlags: 0
