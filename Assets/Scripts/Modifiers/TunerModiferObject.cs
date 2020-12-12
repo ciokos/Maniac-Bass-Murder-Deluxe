@@ -12,7 +12,7 @@ public class TunerModiferObject : MonoBehaviour
     {
         if(col.gameObject.name == "Player")
         {
-            modifier = new TunerModifier();
+            modifier = gameObject.AddComponent<TunerModifier>();
             col.gameObject.GetComponent<Shooting>().AddModifier(modifier, tunerModifierSprite);
             Destroy(gameObject);
         }

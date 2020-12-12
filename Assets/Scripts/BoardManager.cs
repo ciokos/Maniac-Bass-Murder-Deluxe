@@ -39,6 +39,15 @@ public class BoardManager : MonoBehaviour
     public NavMeshSurface2d surface2D;
     public GameObject BoardHolder;
 
+    public bool NoEnemies()
+    {
+        foreach (GameObject enemy in enemyList)
+        {
+            if (enemy != null)
+                return false;
+        }
+        return true;
+    }
     bool randomRoom()
     {
         return (Random.value < roomLuck);

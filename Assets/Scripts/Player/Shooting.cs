@@ -114,12 +114,10 @@ public class Shooting : MonoBehaviour
         modifiers.Add(modifier);
         for (int i = 0; i < modifiersSprites.Length; i++)
         {
-            Debug.Log(modifierSprite);
             if (modifiersSprites[i].sprite == null)
             {
                 modifiersSprites[i].sprite = modifierSprite;
                 modifiersSprites[i].enabled = true;
-                Debug.Log(modifiersSprites[i].sprite);
                 break;
             }
 
