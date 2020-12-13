@@ -31,6 +31,7 @@ public class BoardManager : MonoBehaviour
     public Count roomCount = new Count(5, 10);
     // putting prefabs in these arrays
     public GameObject[] roomPrefab;
+    public GameObject startingRoomPrefab;
     public GameObject wallPrefab;
     public GameObject[] enemyPrefab;
     public List<Vector3> RoomPositions = new List<Vector3>();
@@ -98,7 +99,7 @@ public class BoardManager : MonoBehaviour
         int roomNumber = 0;
         // create first room
         GameObject toInstantiate2;
-        toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length)];
+        toInstantiate2 = startingRoomPrefab;
         GameObject instance2 = Instantiate(toInstantiate2, new Vector3(0f, 0f, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
         roomNumber++;
         RoomPositions.Add(new Vector3(0f, 0f, 0f));
