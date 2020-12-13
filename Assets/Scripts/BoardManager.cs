@@ -44,12 +44,18 @@ public class BoardManager : MonoBehaviour
 
     public bool NoEnemies()
     {
-        foreach (GameObject enemy in enemyList)
+        if (enemiesSpawned)
         {
-            if (enemy != null && enemiesSpawned)
-                return false;
+            foreach (GameObject enemy in enemyList)
+            {
+                if (enemy != null )
+                    return false;
+            }
+            return true;
         }
-        return true;
+        else
+            return false;
+
     }
     bool randomRoom()
     {

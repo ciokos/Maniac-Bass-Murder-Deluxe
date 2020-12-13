@@ -69,7 +69,7 @@ public class Conductor : MonoBehaviour
         }
         loopPositionInBeats = (songPositionInBeats - completedLoops * beatsPerLoop);
 
-        if (loopPositionInBeats - prevInterval >= beatUnit)
+        if (loopPositionInBeats - prevInterval >= beatUnit && loopPositionInBeats - prevInterval <= 2*beatUnit)
         {
             prevInterval += beatUnit;
             if (prevInterval >= beatsPerLoop - beatUnit)
