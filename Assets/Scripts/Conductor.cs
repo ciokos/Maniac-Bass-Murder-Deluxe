@@ -69,10 +69,10 @@ public class Conductor : MonoBehaviour
         }
         loopPositionInBeats = (songPositionInBeats - completedLoops * beatsPerLoop);
 
-        if (loopPositionInBeats - prevInterval >= 0.25)
+        if (loopPositionInBeats - prevInterval >= beatUnit)
         {
-            prevInterval += 0.25f;
-            if (prevInterval >= beatsPerLoop)
+            prevInterval += beatUnit;
+            if (prevInterval >= beatsPerLoop - beatUnit)
                 prevInterval = 0;
             Interval.Invoke(prevInterval);
         }
