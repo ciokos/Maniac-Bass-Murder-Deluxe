@@ -37,6 +37,7 @@ public class BoardManager : MonoBehaviour
     public GameObject[] modifiersList;
     public List<Vector3> RoomPositions = new List<Vector3>();
     private List<GameObject> enemyList = new List<GameObject>();
+    private bool enemiesSpawned = false;
 
     public NavMeshSurface2d surface2D;
     public GameObject BoardHolder;
@@ -45,7 +46,7 @@ public class BoardManager : MonoBehaviour
     {
         foreach (GameObject enemy in enemyList)
         {
-            if (enemy != null)
+            if (enemy != null && enemiesSpawned)
                 return false;
         }
         return true;
@@ -145,6 +146,7 @@ public class BoardManager : MonoBehaviour
             GameObject instance3 = Instantiate(toInstantiate3, spawnPoint, Quaternion.identity, BoardHolder.transform) as GameObject;
             enemyList.Add(instance3);
         }
+        enemiesSpawned = true;
         
     }
 
