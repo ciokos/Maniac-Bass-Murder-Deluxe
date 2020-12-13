@@ -34,6 +34,7 @@ public class BoardManager : MonoBehaviour
     public GameObject startingRoomPrefab;
     public GameObject wallPrefab;
     public GameObject[] enemyPrefab;
+    public GameObject[] modifiersList;
     public List<Vector3> RoomPositions = new List<Vector3>();
     private List<GameObject> enemyList = new List<GameObject>();
 
@@ -124,11 +125,23 @@ public class BoardManager : MonoBehaviour
         // getting the spawn positions from the prefabs
         GameObject[] spawnArray = GameObject.FindGameObjectsWithTag("SpawnLocation");
         List<Vector3> spawnLocationList = new List<Vector3>();
+        // spawn modifiers
+        foreach (GameObject modifier in modifiersList)
+        {
+            int randomIndex = Random.Range(0, spawnArray.Length);
+            GameObject modifierLocation = spawnArray[randomIndex];
+            spawnArray[randomIndex] = spawnArray[spawnArray.Length - 1];
+            Array.Resize(ref spawnArray, spawnArray.Length -1);
+            Vector3 spawnPoint = modifierLocation.transform.position;
+            GameObject toInstantiate3 = modifier;
+            GameObject instance3 = Instantiate(toInstantiate3, spawnPoint, Quaternion.identity, BoardHolder.transform) as GameObject;
+        }
+        // spawn enemies
         foreach (GameObject spawnL in spawnArray)
         {
             Vector3 spawnPoint = spawnL.transform.position;
             GameObject toInstantiate3;
-            toInstantiate3 = enemyPrefab[Random.Range(0, enemyPrefab.Length - 1)];
+            toInstantiate3 = enemyPrefab[Random.Range(0, enemyPrefab.Length)];
             GameObject instance3 = Instantiate(toInstantiate3, spawnPoint, Quaternion.identity, BoardHolder.transform) as GameObject;
             enemyList.Add(instance3);
         }
