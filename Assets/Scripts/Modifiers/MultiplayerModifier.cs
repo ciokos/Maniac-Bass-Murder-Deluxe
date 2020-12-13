@@ -7,7 +7,7 @@ public class MultiplayerModifier : IModifier
 {
     public TMP_Text multiplayerText;
     public int multiplayer = 1;
-    public int multiplayerSteps = 1;
+    public int multiplayerSteps = 4;
     private int multiplayerCurrentStep = 0;
     public void Modify(List<BulletParameters> bullets)
     {

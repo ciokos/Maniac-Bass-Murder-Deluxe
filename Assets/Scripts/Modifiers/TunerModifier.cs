@@ -11,7 +11,8 @@ public class TunerModifier : MonoBehaviour, IModifier
 
     public void Modify(List<BulletParameters> bullets)
     {
-        foreach (BulletParameters b in bullets)
-            b.isTuned = true;
+        if(bullets[0].isEmpowered)
+            foreach (BulletParameters b in bullets)
+                b.isTuned = true;
     }
 }

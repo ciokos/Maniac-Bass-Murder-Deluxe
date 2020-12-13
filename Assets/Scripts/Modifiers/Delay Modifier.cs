@@ -12,11 +12,14 @@ public class DelayModifier : MonoBehaviour, IModifier
     public void Modify(List<BulletParameters> bullets)
     {
         float delay = FindObjectOfType<Conductor>().secPerBeat/4;
-        BulletParameters delayedBulletParameters = new BulletParameters(bullets[0])
+        if (bullets[0].isEmpowered)
         {
-            delay = delay
-        };
-        bullets.Add(delayedBulletParameters);
+            BulletParameters delayedBulletParameters = new BulletParameters(bullets[0])
+            {
+                delay = delay
+            };
+            bullets.Add(delayedBulletParameters);
+        }
         return;
     }
 }
