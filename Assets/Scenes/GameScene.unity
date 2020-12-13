@@ -348,7 +348,10 @@ MonoBehaviour:
   - {fileID: 6193502663920496808, guid: 455513846f64f864fa5b2f8581000585, type: 3}
   - {fileID: 5194521722300331078, guid: b0e72634633c52c4aa2f59c6258b01e5, type: 3}
   - {fileID: 7826869977813260929, guid: a80d92d861856ee459ec553ee60a8b98, type: 3}
-  modifiersList: []
+  modifiersList:
+  - {fileID: 3812697211527395029, guid: a091fa4245c549a40b5616e713e7995f, type: 3}
+  - {fileID: 8432825390399462245, guid: 0489d110bcb3bd04cbde968bededf93e, type: 3}
+  - {fileID: 874300050159726092, guid: 9bbadd98e776c884ea85f2fb53f27b0a, type: 3}
   RoomPositions: []
   surface2D: {fileID: 805624120}
   BoardHolder: {fileID: 805624119}
