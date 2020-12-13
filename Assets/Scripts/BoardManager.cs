@@ -98,7 +98,7 @@ public class BoardManager : MonoBehaviour
         int roomNumber = 0;
         // create first room
         GameObject toInstantiate2;
-        toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length - 1)];
+        toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length)];
         GameObject instance2 = Instantiate(toInstantiate2, new Vector3(0f, 0f, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
         roomNumber++;
         RoomPositions.Add(new Vector3(0f, 0f, 0f));
@@ -109,7 +109,7 @@ public class BoardManager : MonoBehaviour
             {
                 if ((x != 0 || y != 0) && roomNumber < roomCount.maximum && randomRoom() && RoomAdjacent(RoomPositions, x, y))
                 {
-                    toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length - 1)];
+                    toInstantiate2 = roomPrefab[Random.Range(0, roomPrefab.Length)];
                     instance2 = Instantiate(toInstantiate2, new Vector3(x * 24, y * 24, 0f), Quaternion.identity, BoardHolder.transform) as GameObject;
                     roomNumber++;
                     RoomPositions.Add(new Vector3(x, y, 0f));
