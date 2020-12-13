@@ -343,9 +343,11 @@ MonoBehaviour:
   - {fileID: 7973111060606496596, guid: e46aabd919d01404a89619702dc2329f, type: 3}
   - {fileID: 8045218618620183416, guid: 6a85fc5de22121945ae2323bc326e6d9, type: 3}
   startingRoomPrefab: {fileID: 1217338680812830793, guid: 67cfd367de22ba24b81bae05609c322d, type: 3}
-  wallPrefab: {fileID: 855896928029014909, guid: 0593678f8803fc94ea7d76a6aa0ac134, type: 3}
+  wallPrefab: {fileID: 2174926370424053480, guid: 0593678f8803fc94ea7d76a6aa0ac134, type: 3}
   enemyPrefab:
-  - {fileID: 3278484700363382266, guid: 455513846f64f864fa5b2f8581000585, type: 3}
+  - {fileID: 6193502663920496808, guid: 455513846f64f864fa5b2f8581000585, type: 3}
+  - {fileID: 5194521722300331078, guid: b0e72634633c52c4aa2f59c6258b01e5, type: 3}
+  - {fileID: 7826869977813260929, guid: a80d92d861856ee459ec553ee60a8b98, type: 3}
   modifiersList: []
   RoomPositions: []
   surface2D: {fileID: 805624120}
@@ -671,7 +673,7 @@ MonoBehaviour:
   powerBulletPrefab: {fileID: 6969571981930566044, guid: 370f6be268d1661418adb29e8b62e75e, type: 3}
   regularShotAudio: {fileID: 8300000, guid: 25ee66760ef512d4f80c3b1291bad487, type: 3}
   powerShotAudio: {fileID: 8300000, guid: 2546be42b93c2d8468cbbe37fc5d5657, type: 3}
-  bulletSpeed: 5
+  bulletSpeed: 7
   bulletRegularForce: 1
   bulletPowerForce: 2
   delay: 0.5
@@ -1614,7 +1616,7 @@ Transform:
   m_GameObject: {fileID: 1398089942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 296640198}
   m_RootOrder: 2
@@ -2469,7 +2471,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 20
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

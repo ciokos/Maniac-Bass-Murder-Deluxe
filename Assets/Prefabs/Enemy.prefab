@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 968226759791197519}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 8069408614763304065}
   m_RootOrder: 2
@@ -188,7 +188,7 @@ MonoBehaviour:
   - 11
   - 15
   bulletPrefab: {fileID: 6969571981930566044, guid: eec2902c4c330cc4587b481fe2ce3eab, type: 3}
-  bulletForce: 3
+  bulletForce: 5
   bulletDamage: 1
   audioSource: {fileID: 2210303138780252404}
   viewDistance: 10
