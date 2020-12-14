@@ -192,7 +192,7 @@ MonoBehaviour:
   - 8
   - 12
   bulletPrefab: {fileID: 6969571981930566044, guid: eec2902c4c330cc4587b481fe2ce3eab, type: 3}
-  bulletForce: 5
+  bulletForce: 6
   bulletDamage: 1
   audioSource: {fileID: 2210303138780252404}
   viewDistance: 10
@@ -250,7 +250,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6193502663920496808}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.2
+  m_Radius: 0.1
   m_Speed: 1.75
   m_Acceleration: 8
   avoidancePriority: 50

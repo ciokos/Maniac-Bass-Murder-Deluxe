@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: m_StoppingDistance
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -1428793126470511601, guid: 455513846f64f864fa5b2f8581000585, type: 3}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 592823605609200119, guid: 455513846f64f864fa5b2f8581000585, type: 3}
       propertyPath: beatsToShoot.Array.size
       value: 4
