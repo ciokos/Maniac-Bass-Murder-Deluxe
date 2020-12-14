@@ -41,6 +41,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 592823605609200119, guid: 455513846f64f864fa5b2f8581000585, type: 3}
+      propertyPath: beatsToShoot.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 592823605609200119, guid: 455513846f64f864fa5b2f8581000585, type: 3}
+      propertyPath: beatsToShoot.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 592823605609200119, guid: 455513846f64f864fa5b2f8581000585, type: 3}
+      propertyPath: beatsToShoot.Array.data[1]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 592823605609200119, guid: 455513846f64f864fa5b2f8581000585, type: 3}
+      propertyPath: beatsToShoot.Array.data[2]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 592823605609200119, guid: 455513846f64f864fa5b2f8581000585, type: 3}
+      propertyPath: beatsToShoot.Array.data[3]
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2210303138780252404, guid: 455513846f64f864fa5b2f8581000585, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e9f3129e93ee7c8409eae7d2a2bd9b78, type: 3}
     - target: {fileID: 3278484700363382266, guid: 455513846f64f864fa5b2f8581000585, type: 3}
       propertyPath: m_Name
       value: MovingEnemy

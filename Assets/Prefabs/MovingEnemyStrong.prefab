@@ -7,9 +7,37 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 236873123738536986, guid: b0e72634633c52c4aa2f59c6258b01e5, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7803892a3a14d42409246467f21b89cd, type: 3}
+    - target: {fileID: 1576041934607432985, guid: b0e72634633c52c4aa2f59c6258b01e5, type: 3}
+      propertyPath: beatsToShoot.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1576041934607432985, guid: b0e72634633c52c4aa2f59c6258b01e5, type: 3}
       propertyPath: maxHealth
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576041934607432985, guid: b0e72634633c52c4aa2f59c6258b01e5, type: 3}
+      propertyPath: beatsToShoot.Array.data[4]
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576041934607432985, guid: b0e72634633c52c4aa2f59c6258b01e5, type: 3}
+      propertyPath: beatsToShoot.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576041934607432985, guid: b0e72634633c52c4aa2f59c6258b01e5, type: 3}
+      propertyPath: beatsToShoot.Array.data[1]
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576041934607432985, guid: b0e72634633c52c4aa2f59c6258b01e5, type: 3}
+      propertyPath: beatsToShoot.Array.data[2]
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576041934607432985, guid: b0e72634633c52c4aa2f59c6258b01e5, type: 3}
+      propertyPath: beatsToShoot.Array.data[3]
+      value: 10.5
       objectReference: {fileID: 0}
     - target: {fileID: 4670339764907580279, guid: b0e72634633c52c4aa2f59c6258b01e5, type: 3}
       propertyPath: m_Speed

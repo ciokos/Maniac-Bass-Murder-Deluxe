@@ -183,10 +183,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 7346462275666300269}
   beatsToShoot:
-  - 3
-  - 7
-  - 11
-  - 15
+  - 0
+  - 0.25
+  - 3.75
+  - 5
+  - 8
+  - 12
   bulletPrefab: {fileID: 6969571981930566044, guid: eec2902c4c330cc4587b481fe2ce3eab, type: 3}
   bulletForce: 5
   bulletDamage: 1
