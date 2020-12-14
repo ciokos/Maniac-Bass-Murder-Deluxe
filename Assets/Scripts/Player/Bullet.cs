@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     private bool isEmpowered = false;
     private bool isTuned = false;
     public HitEvent enemyHitEvent;
-    private readonly float tuneFactor = 0.1f;
+    private readonly float tuneFactor = 0.2f;
 
     void Start()
     {

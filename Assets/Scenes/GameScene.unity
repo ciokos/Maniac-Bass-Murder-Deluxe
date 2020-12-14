@@ -679,7 +679,7 @@ MonoBehaviour:
   bulletSpeed: 7
   bulletRegularForce: 1
   bulletPowerForce: 2
-  delay: 1
+  delay: 0.75
   shot_accuracy: 0.2
   audioSource: {fileID: 1636495604}
   modifiersSprites:
